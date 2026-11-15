@@ -1,0 +1,128 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "done": "Done",
+    "save": "Save",
+    "error": "Error",
+    "unknownError": "Something went wrong",
+    "packs": "{{n}} pk."
+  },
+  "navigation": {
+    "medicines": "Medicines",
+    "settings": "Settings",
+    "newMedicine": "New medicine",
+    "medicine": "Medicine",
+    "editMedicine": "Edit medicine",
+    "scanner": "Scanner",
+    "onboarding": "Onboarding"
+  },
+  "app": {
+    "databaseFailed": "Could not prepare the database"
+  },
+  "medicineForms": {
+    "tablets": "Tablets",
+    "capsules": "Capsules",
+    "syrup": "Syrup",
+    "drops": "Drops",
+    "ointment": "Ointment",
+    "spray": "Spray",
+    "other": "Other"
+  },
+  "packageStatuses": {
+    "active": "Active",
+    "used": "Used up",
+    "discarded": "Discarded"
+  },
+  "defaultTags": {
+    "pain": "Pain",
+    "fever": "Fever",
+    "cold": "Cold",
+    "allergy": "Allergy",
+    "stomach": "Stomach",
+    "firstAid": "First aid"
+  },
+  "expiry": {
+    "until": "until {{date}}",
+    "untilPrefix": "until",
+    "lastDay": "last day",
+    "daysLeft": {
+      "one": "{{n}} day left",
+      "few": "{{n}} days left",
+      "many": "{{n}} days left",
+      "other": "{{n}} days left"
+    },
+    "expiredAgo": {
+      "one": "expired {{n}} day ago",
+      "few": "expired {{n}} days ago",
+      "many": "expired {{n}} days ago",
+      "other": "expired {{n}} days ago"
+    }
+  },
+  "datePicker": {
+    "placeholder": "Pick a date"
+  },
+  "medicineList": {
+    "searchPlaceholder": "Search by name",
+    "loadFailed": "Could not load medicines",
+    "emptyTitle": "Your medicine kit is empty",
+    "emptyDescription": "Add your first medicine to keep track of expiry dates.",
+    "addMedicine": "Add medicine",
+    "noResultsTitle": "Nothing found",
+    "noResultsDescription": "Try changing the search or tag filter.",
+    "resetFilters": "Reset filters",
+    "noActivePackages": "No active packages"
+  },
+  "medicineForm": {
+    "name": "Name",
+    "namePlaceholder": "e.g. Paracetamol",
+    "form": "Form",
+    "dosage": "Dosage (optional)",
+    "dosagePlaceholder": "e.g. 500 mg",
+    "tags": "Tags",
+    "package": "Package",
+    "monthOnly": "Only month and year are known",
+    "expiryDate": "Expires on",
+    "quantity": "Number of packs",
+    "notes": "Note (optional)",
+    "notesPlaceholder": "e.g. for headaches, no more than 4 times a day",
+    "addingPackageNotice": "You are adding a new package to “{{name}}”. The medicine details stay unchanged.",
+    "submitCreate": "Save",
+    "submitAddPackage": "Add package",
+    "submitEdit": "Save changes",
+    "saveFailed": "Could not save"
+  },
+  "validation": {
+    "nameRequired": "Enter a name",
+    "tooLong": "Text is too long",
+    "invalidDate": "Invalid date",
+    "expiryRequired": "Enter the expiry date",
+    "quantityRequired": "Enter a quantity",
+    "quantityInteger": "Must be a whole number",
+    "quantityMin": "At least 1",
+    "quantityMax": "No more than 999"
+  },
+  "medicineDetails": {
+    "loadFailed": "Could not load the medicine",
+    "notFoundTitle": "Medicine not found",
+    "notFoundDescription": "It may have been deleted.",
+    "backToList": "Back to list",
+    "packages": "Packages",
+    "addPackage": "+ Add package",
+    "noActivePackages": "No active packages.",
+    "archive": "Archive",
+    "edit": "Edit",
+    "delete": "Delete medicine",
+    "deleteConfirmTitle": "Delete medicine?",
+    "deleteConfirmMessage": "“{{name}}” and all its packages will be deleted permanently.",
+    "deleteConfirm": "Delete"
+  },
+  "package": {
+    "markUsed": "Used up",
+    "markDiscarded": "Discarded",
+    "restore": "Restore",
+    "batch": "batch {{batch}}"
+  },
+  "placeholder": {
+    "comingInStage": "Coming in stage {{stage}}"
+  }
+}

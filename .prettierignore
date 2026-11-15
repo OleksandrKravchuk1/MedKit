@@ -1,0 +1,12 @@
+# Dependencies and build output
+node_modules/
+.expo/
+dist/
+web-build/
+ios/
+android/
+
+# Generated
+drizzle/
+package-lock.json
+expo-env.d.ts
