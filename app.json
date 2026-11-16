@@ -8,9 +8,11 @@
     "scheme": "medkit",
     "userInterfaceStyle": "automatic",
     "ios": {
+      "bundleIdentifier": "com.medkit.app",
       "icon": "./assets/expo.icon"
     },
     "android": {
+      "package": "com.medkit.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -20,6 +22,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
       "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
@@ -32,7 +35,9 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-sqlite",
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,

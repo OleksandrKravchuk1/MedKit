@@ -1,0 +1,128 @@
+{
+  "common": {
+    "cancel": "Скасувати",
+    "done": "Готово",
+    "save": "Зберегти",
+    "error": "Помилка",
+    "unknownError": "Сталася невідома помилка",
+    "packs": "{{n}} уп."
+  },
+  "navigation": {
+    "medicines": "Ліки",
+    "settings": "Налаштування",
+    "newMedicine": "Новий препарат",
+    "medicine": "Препарат",
+    "editMedicine": "Редагування",
+    "scanner": "Сканер",
+    "onboarding": "Онбординг"
+  },
+  "app": {
+    "databaseFailed": "Не вдалося підготувати базу даних"
+  },
+  "medicineForms": {
+    "tablets": "Таблетки",
+    "capsules": "Капсули",
+    "syrup": "Сироп",
+    "drops": "Краплі",
+    "ointment": "Мазь",
+    "spray": "Спрей",
+    "other": "Інше"
+  },
+  "packageStatuses": {
+    "active": "Активна",
+    "used": "Використана",
+    "discarded": "Викинута"
+  },
+  "defaultTags": {
+    "pain": "Біль",
+    "fever": "Температура",
+    "cold": "Застуда",
+    "allergy": "Алергія",
+    "stomach": "Шлунок",
+    "firstAid": "Перша допомога"
+  },
+  "expiry": {
+    "until": "до {{date}}",
+    "untilPrefix": "до",
+    "lastDay": "останній день",
+    "daysLeft": {
+      "one": "залишився {{n}} день",
+      "few": "залишилось {{n}} дні",
+      "many": "залишилось {{n}} днів",
+      "other": "залишилось {{n}} дня"
+    },
+    "expiredAgo": {
+      "one": "прострочено {{n}} день тому",
+      "few": "прострочено {{n}} дні тому",
+      "many": "прострочено {{n}} днів тому",
+      "other": "прострочено {{n}} дня тому"
+    }
+  },
+  "datePicker": {
+    "placeholder": "Обрати дату"
+  },
+  "medicineList": {
+    "searchPlaceholder": "Пошук за назвою",
+    "loadFailed": "Не вдалося завантажити ліки",
+    "emptyTitle": "Аптечка порожня",
+    "emptyDescription": "Додайте перший препарат, щоб стежити за строком придатності.",
+    "addMedicine": "Додати препарат",
+    "noResultsTitle": "Нічого не знайдено",
+    "noResultsDescription": "Спробуйте змінити пошук або фільтр тегів.",
+    "resetFilters": "Скинути фільтри",
+    "noActivePackages": "Немає активних упаковок"
+  },
+  "medicineForm": {
+    "name": "Назва",
+    "namePlaceholder": "Наприклад, Парацетамол",
+    "form": "Форма",
+    "dosage": "Дозування (необов'язково)",
+    "dosagePlaceholder": "Наприклад, 500 мг",
+    "tags": "Теги",
+    "package": "Упаковка",
+    "monthOnly": "Відомі лише місяць і рік",
+    "expiryDate": "Придатний до",
+    "quantity": "Кількість упаковок",
+    "notes": "Нотатка (необов'язково)",
+    "notesPlaceholder": "Наприклад, від головного болю, не більше 4 разів на день",
+    "addingPackageNotice": "Додаєте нову упаковку до препарату «{{name}}». Дані препарату при цьому не змінюються.",
+    "submitCreate": "Зберегти",
+    "submitAddPackage": "Додати упаковку",
+    "submitEdit": "Зберегти зміни",
+    "saveFailed": "Не вдалося зберегти"
+  },
+  "validation": {
+    "nameRequired": "Вкажіть назву",
+    "tooLong": "Занадто довгий текст",
+    "invalidDate": "Некоректна дата",
+    "expiryRequired": "Вкажіть строк придатності",
+    "quantityRequired": "Вкажіть кількість",
+    "quantityInteger": "Потрібне ціле число",
+    "quantityMin": "Щонайменше 1",
+    "quantityMax": "Не більше 999"
+  },
+  "medicineDetails": {
+    "loadFailed": "Не вдалося завантажити препарат",
+    "notFoundTitle": "Препарат не знайдено",
+    "notFoundDescription": "Можливо, його видалено.",
+    "backToList": "До списку",
+    "packages": "Упаковки",
+    "addPackage": "+ Додати упаковку",
+    "noActivePackages": "Немає активних упаковок.",
+    "archive": "Архів",
+    "edit": "Редагувати",
+    "delete": "Видалити препарат",
+    "deleteConfirmTitle": "Видалити препарат?",
+    "deleteConfirmMessage": "«{{name}}» і всі його упаковки буде видалено назавжди.",
+    "deleteConfirm": "Видалити"
+  },
+  "package": {
+    "markUsed": "Використав",
+    "markDiscarded": "Викинув",
+    "restore": "Повернути",
+    "batch": "серія {{batch}}"
+  },
+  "placeholder": {
+    "comingInStage": "Буде реалізовано на етапі {{stage}}"
+  }
+}

@@ -1,65 +1,58 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://unistyl.es/), etc.
+import { DarkTheme, DefaultTheme, type Theme } from "expo-router";
+
+/*
+ * Hex values for places where className does not apply: navigation themes,
+ * placeholderTextColor, ActivityIndicator, Switch, date picker.
+ * Keep in sync with the CSS variables in src/global.css.
  */
-
-import '@/global.css';
-
-import { Platform } from 'react-native';
-
-export const Colors = {
+export const palette = {
   light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    background: "#F2F2F7",
+    card: "#FFFFFF",
+    foreground: "#111827",
+    muted: "#6B7280",
+    placeholder: "#9CA3AF",
+    border: "#E5E7EB",
+    input: "#D1D5DB",
+    primary: "#2563EB",
   },
   dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+    background: "#000000",
+    card: "#1C1C1E",
+    foreground: "#F3F4F6",
+    muted: "#9CA3AF",
+    placeholder: "#6B7280",
+    border: "#38383A",
+    input: "#48484A",
+    primary: "#0A84FF",
   },
 } as const;
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
+export type ColorSchemeName = keyof typeof palette;
+export type Palette = (typeof palette)[ColorSchemeName];
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+/** React Navigation themes matching the app palette, so headers and tab bar blend with screens. */
+export const navigationThemes: Record<ColorSchemeName, Theme> = {
+  light: {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: palette.light.primary,
+      background: palette.light.background,
+      card: palette.light.card,
+      text: palette.light.foreground,
+      border: palette.light.border,
+    },
   },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+  dark: {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      primary: palette.dark.primary,
+      background: palette.dark.background,
+      card: palette.dark.card,
+      text: palette.dark.foreground,
+      border: palette.dark.border,
+    },
   },
-  web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
-  },
-});
-
-export const Spacing = {
-  half: 2,
-  one: 4,
-  two: 8,
-  three: 16,
-  four: 24,
-  five: 32,
-  six: 64,
-} as const;
-
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const MaxContentWidth = 800;
+};
