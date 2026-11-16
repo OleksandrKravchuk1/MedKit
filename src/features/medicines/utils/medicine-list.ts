@@ -1,19 +1,12 @@
 import type { Medicine, MedicineTag, Package } from "@/db/schema";
-import { getExpiryStatus, type ExpiryStatus } from "@/lib/dates";
+import { getExpiryStatus } from "@/lib/dates";
+
+import type { MedicineListItem } from "../types/medicine-types";
 
 /*
- * Pure list logic (no React, no DB): combines rows from the three live queries
- * into list items, and filters them. Kept separate so it can be unit-tested.
+ * Pure list logic (no React, no DB): combines rows from the live queries into
+ * list items, and filters them.
  */
-
-export type MedicineListItem = Medicine & {
-  /** Earliest expiry among active packages. */
-  nearestExpiry: string | null;
-  /** Sum of quantities of active packages. */
-  packCount: number;
-  tagIds: number[];
-  status: ExpiryStatus | "none";
-};
 
 type ActivePackageRow = Pick<Package, "medicineId" | "expiryDate" | "quantity">;
 
@@ -25,24 +18,25 @@ export function buildMedicineList(
   options: { today?: Date; locale?: string } = {},
 ): MedicineListItem[] {
   const today = options.today ?? new Date();
-
   const nearest = new Map<number, string>();
   const counts = new Map<number, number>();
+  const tagsByMedicine = new Map<number, number[]>();
+
   for (const p of activePackages) {
     const current = nearest.get(p.medicineId);
-    if (!current || p.expiryDate < current)
+    if (!current || p.expiryDate < current) {
       nearest.set(p.medicineId, p.expiryDate);
+    }
     counts.set(p.medicineId, (counts.get(p.medicineId) ?? 0) + p.quantity);
   }
 
-  const tagsByMedicine = new Map<number, number[]>();
   for (const l of links) {
-    const list = tagsByMedicine.get(l.medicineId) ?? [];
-    list.push(l.tagId);
-    tagsByMedicine.set(l.medicineId, list);
+    const ids = tagsByMedicine.get(l.medicineId) ?? [];
+    ids.push(l.tagId);
+    tagsByMedicine.set(l.medicineId, ids);
   }
 
-  const items: MedicineListItem[] = medicines.map((m) => {
+  const items = medicines.map((m): MedicineListItem => {
     const nearestExpiry = nearest.get(m.id) ?? null;
     return {
       ...m,

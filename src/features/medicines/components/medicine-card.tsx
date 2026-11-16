@@ -5,9 +5,12 @@ import { formatDate, formatDaysLeft } from "@/i18n/format";
 import { cn } from "@/lib/cn";
 import { daysUntil } from "@/lib/dates";
 
-import { STATUS_DOT_CLASS, STATUS_TEXT_CLASS } from "../expiry-status";
-import { formatMedicineSubtitle } from "../labels";
-import type { MedicineListItem } from "../list-builder";
+import {
+  STATUS_DOT_CLASS,
+  STATUS_TEXT_CLASS,
+} from "../constants/expiry-status-classes";
+import { formatMedicineSubtitle } from "../utils/medicine-display";
+import type { MedicineListItem } from "../types/medicine-types";
 
 type MedicineCardProps = {
   item: MedicineListItem;

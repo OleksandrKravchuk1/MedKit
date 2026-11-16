@@ -14,17 +14,11 @@ import {
   toIsoDate,
 } from "@/lib/dates";
 
-import { STATUS_DOT_CLASS, STATUS_TEXT_CLASS } from "../expiry-status";
-
-function usePackageDetails(pkg: Package): string {
-  const { t } = useTranslation();
-  return [
-    pkg.quantity > 1 ? t("common.packs", { n: pkg.quantity }) : null,
-    pkg.batch ? t("package.batch", { batch: pkg.batch }) : null,
-  ]
-    .filter(Boolean)
-    .join(" · ");
-}
+import {
+  STATUS_DOT_CLASS,
+  STATUS_TEXT_CLASS,
+} from "../constants/expiry-status-classes";
+import { formatPackageDetails } from "../utils/medicine-display";
 
 type ActivePackageRowProps = {
   pkg: Package;
@@ -43,13 +37,13 @@ export function ActivePackageRow({
   const { t } = useTranslation();
   const [pickerOpen, setPickerOpen] = useState(false);
   const status = getExpiryStatus(pkg.expiryDate);
-  const details = usePackageDetails(pkg);
+  const details = formatPackageDetails(pkg);
 
   return (
     <View className="rounded-xl border border-border bg-card p-3">
       <Pressable
         accessibilityRole="button"
-        onPress={() => setPickerOpen((o) => !o)}
+        onPress={() => setPickerOpen((open) => !open)}
         className="py-1"
       >
         <Text className="text-base font-semibold text-primary">
@@ -99,40 +93,6 @@ export function ActivePackageRow({
           className="flex-1"
         />
       </View>
-    </View>
-  );
-}
-
-type ArchivedPackageRowProps = {
-  pkg: Package;
-  onRestore: () => void;
-};
-
-/** Used or discarded package, can be restored to active. */
-export function ArchivedPackageRow({
-  pkg,
-  onRestore,
-}: ArchivedPackageRowProps) {
-  const { t } = useTranslation();
-  const details = usePackageDetails(pkg);
-
-  return (
-    <View className="flex-row items-center rounded-xl bg-subtle p-3">
-      <View className="flex-1">
-        <Text className="text-sm text-muted line-through">
-          {t("expiry.until", { date: formatDate(pkg.expiryDate) })}
-        </Text>
-        <Text className="text-xs text-muted">
-          {t(`packageStatuses.${pkg.status}`)}
-          {details ? ` · ${details}` : ""}
-        </Text>
-      </View>
-      <Button
-        title={t("package.restore")}
-        variant="ghost"
-        size="sm"
-        onPress={onRestore}
-      />
     </View>
   );
 }

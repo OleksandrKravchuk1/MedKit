@@ -4,22 +4,16 @@ import { useTranslation } from "react-i18next";
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
 import { MedicineForm } from "@/features/medicines/components/medicine-form";
+import { EMPTY_MEDICINE_FORM } from "@/features/medicines/constants/medicine-form-constants";
+import { createMedicineWithPackage } from "@/features/medicines/mutations/medicine-mutations";
+import { addPackage } from "@/features/medicines/mutations/package-mutations";
 import {
-  addPackage,
-  createMedicineWithPackage,
-} from "@/features/medicines/mutations";
-import { useMedicine } from "@/features/medicines/queries";
-import {
-  EMPTY_MEDICINE_FORM,
-  type MedicineFormValues,
-} from "@/features/medicines/schema";
+  toFormValues,
+  toMedicineInput,
+  toPackageInput,
+} from "@/features/medicines/utils/medicine-form-mappers";
+import { useMedicine } from "@/features/medicines/hooks/use-medicine";
 import { runSafely } from "@/lib/alerts";
-
-/** Package fields from the form; the schema guarantees expiryDate in create mode. */
-const toPackageInput = (values: MedicineFormValues) => ({
-  expiryDate: values.expiryDate!,
-  quantity: values.quantity,
-});
 
 /**
  * /medicine/new                 — create a medicine with its first package.
@@ -44,7 +38,11 @@ function CreateMedicineForm() {
       submitLabel={t("medicineForm.submitCreate")}
       onSubmit={(values) => {
         const saved = runSafely(
-          () => createMedicineWithPackage(values, toPackageInput(values)),
+          () =>
+            createMedicineWithPackage(
+              toMedicineInput(values),
+              toPackageInput(values),
+            ),
           t("medicineForm.saveFailed"),
         );
         if (saved) router.back();
@@ -75,14 +73,7 @@ function AddPackageForm({ medicineId }: { medicineId: number }) {
     <MedicineForm
       mode="create"
       addingPackage
-      defaultValues={{
-        ...EMPTY_MEDICINE_FORM,
-        name: medicine.name,
-        form: medicine.form,
-        dosage: medicine.dosage ?? "",
-        notes: medicine.notes ?? "",
-        tagIds: tags.map((tag) => tag.id),
-      }}
+      defaultValues={toFormValues(medicine, tags)}
       submitLabel={t("medicineForm.submitAddPackage")}
       onSubmit={(values) => {
         const saved = runSafely(

@@ -4,9 +4,12 @@ import { useTranslation } from "react-i18next";
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
 import { MedicineForm } from "@/features/medicines/components/medicine-form";
-import { updateMedicine } from "@/features/medicines/mutations";
-import { useMedicine } from "@/features/medicines/queries";
-import { EMPTY_MEDICINE_FORM } from "@/features/medicines/schema";
+import { updateMedicine } from "@/features/medicines/mutations/medicine-mutations";
+import {
+  toFormValues,
+  toMedicineInput,
+} from "@/features/medicines/utils/medicine-form-mappers";
+import { useMedicine } from "@/features/medicines/hooks/use-medicine";
 import { runSafely } from "@/lib/alerts";
 
 export default function EditMedicineScreen() {
@@ -34,18 +37,11 @@ export default function EditMedicineScreen() {
       // Remount if the route switches to another medicine: defaultValues are read once.
       key={medicine.id}
       mode="edit"
-      defaultValues={{
-        ...EMPTY_MEDICINE_FORM,
-        name: medicine.name,
-        form: medicine.form,
-        dosage: medicine.dosage ?? "",
-        notes: medicine.notes ?? "",
-        tagIds: tags.map((tag) => tag.id),
-      }}
+      defaultValues={toFormValues(medicine, tags)}
       submitLabel={t("medicineForm.submitEdit")}
       onSubmit={(values) => {
         const saved = runSafely(
-          () => updateMedicine(medicine.id, values),
+          () => updateMedicine(medicine.id, toMedicineInput(values)),
           t("medicineForm.saveFailed"),
         );
         if (saved) router.back();

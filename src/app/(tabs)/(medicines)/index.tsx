@@ -8,10 +8,10 @@ import { StateView } from "@/components/feedback/state-view";
 import { Button } from "@/components/ui/button";
 import { Fab } from "@/components/ui/fab";
 import { MedicineCard } from "@/features/medicines/components/medicine-card";
-import { filterMedicines } from "@/features/medicines/list-builder";
-import { useMedicineList } from "@/features/medicines/queries";
+import { useMedicineList } from "@/features/medicines/hooks/use-medicine-list";
+import { filterMedicines } from "@/features/medicines/utils/medicine-list";
 import { TagChips } from "@/features/tags/components/tag-chips";
-import { useTags } from "@/features/tags/queries";
+import { useTags } from "@/features/tags/hooks/use-tags";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 
 export default function MedicinesScreen() {

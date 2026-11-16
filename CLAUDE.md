@@ -30,7 +30,7 @@ src/
   app/          # тільки екрани (Expo Router); вкладки з власним Stack: (tabs)/(medicines), (tabs)/settings
   db/           # schema.ts, client.ts, seed.ts, use-database-ready.ts
   lib/          # чиста логіка без React: dates.ts, cn.ts, alerts.ts; далі gs1.ts, notifications.ts
-  features/     # medicines/, tags/ (settings/ — етап 3): запити, мутації, схеми, чиста логіка, компоненти
+  features/     # medicines/, tags/ (settings/ — етап 3); будова фічі — нижче
   components/
     ui/         # базові елементи: button, chip, fab
     form/       # поля форм: text-field, date-field, date-picker, stepper, field, form-scroll-view
@@ -42,8 +42,28 @@ drizzle/        # згенеровані міграції (корінь)
 drizzle.config.ts  # schema: './src/db/schema.ts', out: './drizzle', dialect: 'sqlite', driver: 'expo'
 ```
 
-- Запити до БД тільки в `src/features/*` (функції/хуки), не в JSX екранів.
-- Імпорти через аліас `@/` → `src/`. Без barrel-файлів (`index.ts` з реекспортами).
+- Запити до БД тільки в `src/features/*` (хуки/функції), не в JSX екранів.
+
+### Будова фічі
+
+Файли розкладаються по підпапках за роллю; папку створюємо, коли з'являється перший файл
+цієї ролі. Назва файлу містить сутність і роль: `medicine-form-schema.ts`, а не `schema.ts`.
+
+```
+features/<feature>/
+  components/   # React-компоненти, один на файл: medicine-card.tsx
+  hooks/        # хуки читання (useLiveQuery), один на файл: use-medicine-list.ts
+  mutations/    # записи в БД, файл на сутність: medicine-mutations.ts, package-mutations.ts
+  schemas/      # zod-схеми: medicine-form-schema.ts
+  constants/    # константи фічі, дефолти форм, класи кольорів: medicine-form-constants.ts
+  utils/        # чиста логіка без React і БД (тестується): medicine-list.ts, medicine-form-mappers.ts
+  types/        # типи фічі: medicine-types.ts
+```
+
+- `utils/` не імпортує `db/client`, хуки й компоненти — щоб юніт-тести не тягнули expo-sqlite.
+- Фічі імпортують одна одну тільки через `hooks/`, `components/`, `types/` (не внутрішні `utils/`).
+- Імпорти через аліас `@/` → `src/`; всередині фічі — відносні. Без barrel-файлів
+  (`index.ts` з реекспортами): Metro не робить tree-shaking, а barrel провокує цикли.
 - Файли в kebab-case; компоненти — іменовані експорти; пропси типізуються як `<Name>Props`.
 - Шари: `app` → `features` → `components` / `lib` / `db` / `constants`. Нижні шари не
   імпортують з `features`; `db` не імпортує `i18n` (локалізовані дані передаються параметрами).

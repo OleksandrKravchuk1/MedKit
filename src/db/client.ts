@@ -14,3 +14,6 @@ sqlite.execSync("PRAGMA foreign_keys = ON;");
 export const db = drizzle(sqlite, { schema });
 
 export type Db = typeof db;
+
+/** The `tx` argument of `db.transaction(...)` callbacks. */
+export type Transaction = Parameters<Parameters<Db["transaction"]>[0]>[0];
