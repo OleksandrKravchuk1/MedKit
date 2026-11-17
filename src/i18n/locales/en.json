@@ -124,5 +124,13 @@
   },
   "placeholder": {
     "comingInStage": "Coming in stage {{stage}}"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "description": "Don't worry, your data is safe. Try again, and if the problem persists, restart the app.",
+    "retry": "Try again",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "pullToRetry": "or pull down to retry"
   }
 }

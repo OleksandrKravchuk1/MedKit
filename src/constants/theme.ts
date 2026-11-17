@@ -15,6 +15,7 @@ export const palette = {
     border: "#E5E7EB",
     input: "#D1D5DB",
     primary: "#2563EB",
+    danger: "#DC2626",
   },
   dark: {
     background: "#000000",
@@ -25,6 +26,7 @@ export const palette = {
     border: "#38383A",
     input: "#48484A",
     primary: "#0A84FF",
+    danger: "#F87171",
   },
 } as const;
 
