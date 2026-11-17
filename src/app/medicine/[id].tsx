@@ -132,7 +132,7 @@ export default function MedicineDetailsScreen() {
         <View className="mt-2 gap-2">
           <Button
             title={t("medicineDetails.edit")}
-            variant="secondary"
+            variant="outline"
             onPress={() =>
               router.push({
                 pathname: "/medicine/[id]/edit",
