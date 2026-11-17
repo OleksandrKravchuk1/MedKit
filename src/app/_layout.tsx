@@ -3,6 +3,7 @@ import "@/global.css";
 import { Stack, ThemeProvider } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { KeyboardProvider } from "react-native-keyboard-controller";
@@ -27,12 +28,20 @@ const getDefaultTags = () =>
 
 export default function RootLayout() {
   const { t } = useTranslation();
-  const { scheme } = useThemeColors();
+  const { scheme, colors } = useThemeColors();
   const { ready, error } = useDatabaseReady(getDefaultTags);
 
   useEffect(() => {
     if (ready || error) SplashScreen.hide();
   }, [ready, error]);
+
+  // Android draws edge-to-edge, and the status/navigation bar areas show the
+  // root window background (white by default). Use the header and tab bar
+  // colour so both bars blend into the system bars, as on iOS. Screens paint
+  // their own `bg-background`, so the window colour is visible only there.
+  useEffect(() => {
+    void SystemUI.setBackgroundColorAsync(colors.card);
+  }, [colors.card]);
 
   if (!ready && !error) return null;
 

@@ -19,10 +19,7 @@ module.exports = {
           DEFAULT: token("primary"),
           soft: token("primary-soft"),
         },
-        danger: {
-          DEFAULT: token("danger"),
-          soft: token("danger-soft"),
-        },
+        danger: token("danger"),
       },
     },
   },

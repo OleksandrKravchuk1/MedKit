@@ -3,19 +3,29 @@ import { ActivityIndicator, Pressable, Text } from "react-native";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 import { cn } from "@/lib/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
+/**
+ * - primary: main action
+ * - secondary: neutral action on a card surface (bg-card)
+ * - outline: neutral action on the screen background (bg-background)
+ * - danger: destructive action
+ * - ghost: text-only action
+ */
+export type ButtonVariant =
+  "primary" | "secondary" | "outline" | "danger" | "ghost";
 export type ButtonSize = "md" | "sm";
 
 const CONTAINER: Record<ButtonVariant, string> = {
   primary: "bg-primary active:bg-primary/80",
   secondary: "bg-subtle active:bg-border",
-  danger: "bg-danger-soft active:bg-danger/20",
+  outline: "border border-border bg-card active:bg-subtle",
+  danger: "bg-danger/15 active:bg-danger/25",
   ghost: "active:bg-subtle",
 };
 
 const LABEL: Record<ButtonVariant, string> = {
   primary: "text-white",
   secondary: "text-foreground",
+  outline: "text-foreground",
   danger: "text-danger",
   ghost: "text-primary",
 };
