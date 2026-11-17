@@ -1,6 +1,6 @@
 import "@/global.css";
 
-import { Stack, ThemeProvider } from "expo-router";
+import { Stack, ThemeProvider, type ErrorBoundaryProps } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
+import { ErrorFallback } from "@/components/feedback/error-fallback";
 import { StateView } from "@/components/feedback/state-view";
 import { DEFAULT_TAGS } from "@/constants/tags";
 import { navigationThemes } from "@/constants/theme";
@@ -18,6 +19,19 @@ import i18n from "@/i18n";
 
 // Keep the native splash visible until the database is migrated and seeded.
 void SplashScreen.preventAutoHideAsync();
+
+/**
+ * Catches render errors anywhere in the app (routes without their own
+ * boundary bubble up here) and shows a retry screen instead of a blank one.
+ */
+export function ErrorBoundary(props: ErrorBoundaryProps) {
+  // The error may happen before the root layout hides the splash screen.
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
+  return <ErrorFallback {...props} />;
+}
 
 /** First-launch tags, named in the current language. */
 const getDefaultTags = () =>
