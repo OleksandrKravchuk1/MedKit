@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Cancel",
     "done": "Done",
+    "close": "Close",
     "save": "Save",
     "error": "Error",
     "unknownError": "Something went wrong",
@@ -71,6 +72,12 @@
     "noResultsDescription": "Try selecting other tags.",
     "resetFilters": "Reset filters",
     "noActivePackages": "No active packages"
+  },
+  "medicineFilter": {
+    "title": "Filters",
+    "open": "Filter by tags",
+    "openActive": "Filter by tags, {{n}} selected",
+    "noTags": "No tags yet"
   },
   "medicineForm": {
     "name": "Name",

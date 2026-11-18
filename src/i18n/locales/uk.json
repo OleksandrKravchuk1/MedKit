@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Скасувати",
     "done": "Готово",
+    "close": "Закрити",
     "save": "Зберегти",
     "error": "Помилка",
     "unknownError": "Сталася невідома помилка",
@@ -71,6 +72,12 @@
     "noResultsDescription": "Спробуйте обрати інші теги.",
     "resetFilters": "Скинути фільтри",
     "noActivePackages": "Немає активних упаковок"
+  },
+  "medicineFilter": {
+    "title": "Фільтри",
+    "open": "Фільтр за тегами",
+    "openActive": "Фільтр за тегами, обрано: {{n}}",
+    "noTags": "Тегів поки немає"
   },
   "medicineForm": {
     "name": "Назва",
