@@ -14,7 +14,8 @@
     "medicine": "Препарат",
     "editMedicine": "Редагування",
     "scanner": "Сканер",
-    "onboarding": "Онбординг"
+    "onboarding": "Онбординг",
+    "search": "Пошук"
   },
   "app": {
     "databaseFailed": "Не вдалося підготувати базу даних"
@@ -62,13 +63,12 @@
     "placeholder": "Обрати дату"
   },
   "medicineList": {
-    "searchPlaceholder": "Пошук за назвою",
     "loadFailed": "Не вдалося завантажити ліки",
     "emptyTitle": "Аптечка порожня",
     "emptyDescription": "Додайте перший препарат, щоб стежити за строком придатності.",
     "addMedicine": "Додати препарат",
     "noResultsTitle": "Нічого не знайдено",
-    "noResultsDescription": "Спробуйте змінити пошук або фільтр тегів.",
+    "noResultsDescription": "Спробуйте обрати інші теги.",
     "resetFilters": "Скинути фільтри",
     "noActivePackages": "Немає активних упаковок"
   },
@@ -124,6 +124,13 @@
   },
   "placeholder": {
     "comingInStage": "Буде реалізовано на етапі {{stage}}"
+  },
+  "search": {
+    "placeholder": "Назва препарату",
+    "hintTitle": "Пошук ліків",
+    "hintDescription": "Введіть назву, щоб знайти препарат у вашій аптечці.",
+    "noResultsTitle": "Нічого не знайдено",
+    "noResultsDescription": "Перевірте назву або спробуйте коротший запит."
   },
   "errorBoundary": {
     "title": "Щось пішло не так",
