@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, TextInput, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
@@ -12,23 +12,18 @@ import { useMedicineList } from "@/features/medicines/hooks/use-medicine-list";
 import { filterMedicines } from "@/features/medicines/utils/medicine-list";
 import { TagChips } from "@/features/tags/components/tag-chips";
 import { useTags } from "@/features/tags/hooks/use-tags";
-import { useThemeColors } from "@/hooks/use-theme-colors";
 
 export default function MedicinesScreen() {
   const { t } = useTranslation();
-  const { colors } = useThemeColors();
   const { data: medicines, error, isLoading } = useMedicineList();
   const { data: tags } = useTags();
-  const [search, setSearch] = useState("");
   const [tagIds, setTagIds] = useState<number[]>([]);
 
-  const visible = filterMedicines(medicines, search, tagIds);
-  const isFiltered = search.trim() !== "" || tagIds.length > 0;
+  // Name search lives in the Search tab; this list filters by tags only.
+  const visible = filterMedicines(medicines, "", tagIds);
+  const isFiltered = tagIds.length > 0;
   const openNew = () => router.push("/medicine/new");
-  const resetFilters = () => {
-    setSearch("");
-    setTagIds([]);
-  };
+  const resetFilters = () => setTagIds([]);
 
   if (error) {
     return (
@@ -66,28 +61,18 @@ export default function MedicinesScreen() {
         keyboardDismissMode="on-drag"
         contentContainerClassName="pb-24"
         ListHeaderComponent={
-          <View className="gap-3 pb-3 pt-4">
-            <View className="px-4">
-              <TextInput
-                value={search}
-                onChangeText={setSearch}
-                placeholder={t("medicineList.searchPlaceholder")}
-                placeholderTextColor={colors.placeholder}
-                autoCorrect={false}
-                clearButtonMode="while-editing"
-                accessibilityLabel={t("medicineList.searchPlaceholder")}
-                className="rounded-xl border border-input bg-card px-3 py-2.5 text-[14px] text-foreground"
-              />
-            </View>
-            {tags.length > 0 ? (
+          tags.length > 0 ? (
+            <View className="pb-3 pt-4">
               <TagChips
                 tags={tags}
                 selectedIds={tagIds}
                 onChange={setTagIds}
                 horizontal
               />
-            ) : null}
-          </View>
+            </View>
+          ) : (
+            <View className="pt-4" />
+          )
         }
         ListEmptyComponent={
           isFiltered ? (

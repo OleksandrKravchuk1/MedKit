@@ -14,7 +14,8 @@
     "medicine": "Medicine",
     "editMedicine": "Edit medicine",
     "scanner": "Scanner",
-    "onboarding": "Onboarding"
+    "onboarding": "Onboarding",
+    "search": "Search"
   },
   "app": {
     "databaseFailed": "Could not prepare the database"
@@ -62,13 +63,12 @@
     "placeholder": "Pick a date"
   },
   "medicineList": {
-    "searchPlaceholder": "Search by name",
     "loadFailed": "Could not load medicines",
     "emptyTitle": "Your medicine kit is empty",
     "emptyDescription": "Add your first medicine to keep track of expiry dates.",
     "addMedicine": "Add medicine",
     "noResultsTitle": "Nothing found",
-    "noResultsDescription": "Try changing the search or tag filter.",
+    "noResultsDescription": "Try selecting other tags.",
     "resetFilters": "Reset filters",
     "noActivePackages": "No active packages"
   },
@@ -124,6 +124,13 @@
   },
   "placeholder": {
     "comingInStage": "Coming in stage {{stage}}"
+  },
+  "search": {
+    "placeholder": "Medicine name",
+    "hintTitle": "Find a medicine",
+    "hintDescription": "Type a name to find a medicine in your kit.",
+    "noResultsTitle": "Nothing found",
+    "noResultsDescription": "Check the spelling or try a shorter query."
   },
   "errorBoundary": {
     "title": "Something went wrong",

@@ -31,6 +31,17 @@ export default function TabsLayout() {
           md="settings"
         />
       </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger
+        name="search"
+        role="search"
+        disableAutomaticSearchActivation
+      >
+        <NativeTabs.Trigger.Label>
+          {t("navigation.search")}
+        </NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="magnifyingglass" md="search" />
+      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }
