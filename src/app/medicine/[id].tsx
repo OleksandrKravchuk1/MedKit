@@ -5,9 +5,9 @@ import { ScrollView, Text, View } from "react-native";
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
 import { Button } from "@/components/ui/button";
-import { MedicineSummary } from "@/features/medicines/components/medicine-summary";
-import { ActivePackageRow } from "@/features/medicines/components/active-package-row";
-import { ArchivedPackageRow } from "@/features/medicines/components/archived-package-row";
+import { MedicineSummary } from "@/features/medicines/components/details/medicine-summary";
+import { ActivePackageRow } from "@/features/medicines/components/details/active-package-row";
+import { ArchivedPackageRow } from "@/features/medicines/components/details/archived-package-row";
 import { deleteMedicine } from "@/features/medicines/mutations/medicine-mutations";
 import {
   setPackageStatus,

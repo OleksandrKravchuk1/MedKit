@@ -80,6 +80,7 @@
     "noTags": "Тегів поки немає"
   },
   "medicineForm": {
+    "sectionMedicine": "Препарат",
     "name": "Назва",
     "namePlaceholder": "Наприклад, Парацетамол",
     "form": "Форма",
@@ -94,8 +95,8 @@
     "notesPlaceholder": "Наприклад, від головного болю, не більше 4 разів на день",
     "addingPackageNotice": "Додаєте нову упаковку до препарату «{{name}}». Дані препарату при цьому не змінюються.",
     "submitCreate": "Зберегти",
-    "submitAddPackage": "Додати упаковку",
-    "submitEdit": "Зберегти зміни",
+    "submitAddPackage": "Додати",
+    "submitEdit": "Зберегти",
     "saveFailed": "Не вдалося зберегти"
   },
   "validation": {

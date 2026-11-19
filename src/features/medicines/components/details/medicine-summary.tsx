@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import type { Medicine, Tag } from "@/db/schema";
 import { TagBadge } from "@/features/tags/components/tag-badge";
 
-import { formatMedicineSubtitle } from "../utils/medicine-display";
+import { formatMedicineSubtitle } from "../../utils/medicine-display";
 
 type MedicineSummaryProps = {
   medicine: Medicine;

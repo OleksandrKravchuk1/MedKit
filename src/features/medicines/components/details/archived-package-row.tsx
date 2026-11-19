@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { Package } from "@/db/schema";
 import { formatDate } from "@/i18n/format";
 
-import { formatPackageDetails } from "../utils/medicine-display";
+import { formatPackageDetails } from "../../utils/medicine-display";
 
 type ArchivedPackageRowProps = {
   pkg: Package;
