@@ -80,6 +80,7 @@
     "noTags": "No tags yet"
   },
   "medicineForm": {
+    "sectionMedicine": "Medicine",
     "name": "Name",
     "namePlaceholder": "e.g. Paracetamol",
     "form": "Form",
@@ -94,8 +95,8 @@
     "notesPlaceholder": "e.g. for headaches, no more than 4 times a day",
     "addingPackageNotice": "You are adding a new package to “{{name}}”. The medicine details stay unchanged.",
     "submitCreate": "Save",
-    "submitAddPackage": "Add package",
-    "submitEdit": "Save changes",
+    "submitAddPackage": "Add",
+    "submitEdit": "Save",
     "saveFailed": "Could not save"
   },
   "validation": {

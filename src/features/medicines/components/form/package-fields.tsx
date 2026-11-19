@@ -10,8 +10,8 @@ import { toLastDayOfMonth } from "@/lib/dates";
 import {
   QUANTITY_MAX,
   QUANTITY_MIN,
-} from "../constants/medicine-form-constants";
-import type { MedicineFormValues } from "../types/medicine-types";
+} from "../../constants/medicine-form-constants";
+import type { MedicineFormValues } from "../../types/medicine-types";
 
 /** "Package" section of the medicine form: expiry date and quantity. */
 export function PackageFields() {

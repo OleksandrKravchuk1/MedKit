@@ -51,8 +51,10 @@ drizzle.config.ts  # schema: './src/db/schema.ts', out: './drizzle', dialect: 's
 
 ```
 features/<feature>/
-  components/   # React-компоненти, один на файл: medicine-card.tsx
-  hooks/        # хуки читання (useLiveQuery), один на файл: use-medicine-list.ts
+  components/   # React-компоненти, один на файл, у підпапках за частиною UI:
+                #   list/, filter/, form/, details/ (form/medicine-form.tsx)
+  hooks/        # хуки фічі, один на файл: читання (use-medicine-list.ts),
+                #   спільний стан-контекст (use-medicine-filter.tsx), опції екрана
   mutations/    # записи в БД, файл на сутність: medicine-mutations.ts, package-mutations.ts
   schemas/      # zod-схеми: medicine-form-schema.ts
   constants/    # константи фічі, дефолти форм, класи кольорів: medicine-form-constants.ts
@@ -61,6 +63,8 @@ features/<feature>/
 ```
 
 - `utils/` не імпортує `db/client`, хуки й компоненти — щоб юніт-тести не тягнули expo-sqlite.
+- Підпапки `components/` групують за частиною інтерфейсу (що змінюється разом), а не за типом.
+  Платформні версії поруч: `medicine-form-fields.tsx` (Android) і `.ios.tsx` (SwiftUI).
 - Фічі імпортують одна одну тільки через `hooks/`, `components/`, `types/` (не внутрішні `utils/`).
 - Імпорти через аліас `@/` → `src/`; всередині фічі — відносні. Без barrel-файлів
   (`index.ts` з реекспортами): Metro не робить tree-shaking, а barrel провокує цикли.

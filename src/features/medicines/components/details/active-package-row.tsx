@@ -17,8 +17,8 @@ import {
 import {
   STATUS_DOT_CLASS,
   STATUS_TEXT_CLASS,
-} from "../constants/expiry-status-classes";
-import { formatPackageDetails } from "../utils/medicine-display";
+} from "../../constants/expiry-status-classes";
+import { formatPackageDetails } from "../../utils/medicine-display";
 
 type ActivePackageRowProps = {
   pkg: Package;

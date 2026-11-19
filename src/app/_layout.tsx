@@ -75,7 +75,10 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen
               name="medicine/new"
-              options={{ title: t("navigation.newMedicine") }}
+              options={{
+                presentation: "modal",
+                title: t("navigation.newMedicine"),
+              }}
             />
             <Stack.Screen
               name="medicine/[id]"
@@ -83,7 +86,10 @@ export default function RootLayout() {
             />
             <Stack.Screen
               name="medicine/[id]/edit"
-              options={{ title: t("navigation.editMedicine") }}
+              options={{
+                presentation: "modal",
+                title: t("navigation.editMedicine"),
+              }}
             />
             <Stack.Screen
               name="scanner"

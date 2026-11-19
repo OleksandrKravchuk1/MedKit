@@ -5,7 +5,7 @@ import { FlatList } from "react-native";
 
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
-import { MedicineCard } from "@/features/medicines/components/medicine-card";
+import { MedicineCard } from "@/features/medicines/components/list/medicine-card";
 import { useMedicineList } from "@/features/medicines/hooks/use-medicine-list";
 import { filterMedicines } from "@/features/medicines/utils/medicine-list";
 
