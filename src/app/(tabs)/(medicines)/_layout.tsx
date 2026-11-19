@@ -2,7 +2,7 @@ import { router, Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import { MedicineFilterProvider } from "@/features/medicines/hooks/use-medicine-filter";
-import { useMedicineFilterHeaderOptions } from "@/features/medicines/hooks/use-medicine-filter-header-options";
+import { useMedicinesHeaderOptions } from "@/features/medicines/hooks/use-medicines-header-options";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 
 export default function MedicinesTabLayout() {
@@ -16,9 +16,10 @@ export default function MedicinesTabLayout() {
 function MedicinesStack() {
   const { t } = useTranslation();
   const { colors } = useThemeColors();
-  const filterHeaderOptions = useMedicineFilterHeaderOptions(() =>
-    router.push("/filters"),
-  );
+  const headerOptions = useMedicinesHeaderOptions({
+    onAdd: () => router.push("/medicine/new"),
+    onOpenFilters: () => router.push("/filters"),
+  });
 
   return (
     <Stack>
@@ -27,7 +28,7 @@ function MedicinesStack() {
         options={{
           title: t("navigation.medicines"),
           headerLargeTitleEnabled: true,
-          ...filterHeaderOptions,
+          ...headerOptions,
         }}
       />
       <Stack.Screen

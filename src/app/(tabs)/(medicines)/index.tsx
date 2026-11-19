@@ -4,10 +4,9 @@ import { FlatList, View } from "react-native";
 
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
-import { Button } from "@/components/ui/button";
-import { Fab } from "@/components/ui/fab";
-import { MedicineCard } from "@/features/medicines/components/list/medicine-card";
 import { MedicineFilterEmptyState } from "@/features/medicines/components/filter/medicine-filter-empty-state";
+import { AddMedicineFab } from "@/features/medicines/components/list/add-medicine-fab";
+import { MedicineCard } from "@/features/medicines/components/list/medicine-card";
 import { useMedicineFilter } from "@/features/medicines/hooks/use-medicine-filter";
 import { useMedicineList } from "@/features/medicines/hooks/use-medicine-list";
 import { filterMedicines } from "@/features/medicines/utils/medicine-list";
@@ -36,13 +35,13 @@ export default function MedicinesScreen() {
 
   if (medicines.length === 0) {
     return (
-      <StateView
-        title={t("medicineList.emptyTitle")}
-        description={t("medicineList.emptyDescription")}
-        action={
-          <Button title={t("medicineList.addMedicine")} onPress={openNew} />
-        }
-      />
+      <View className="flex-1 bg-background">
+        <StateView
+          title={t("medicineList.emptyTitle")}
+          description={t("medicineList.emptyDescription")}
+        />
+        <AddMedicineFab onPress={openNew} />
+      </View>
     );
   }
 
@@ -52,16 +51,13 @@ export default function MedicinesScreen() {
         contentInsetAdjustmentBehavior="automatic"
         data={visible}
         keyExtractor={(item) => String(item.id)}
-        contentContainerClassName="pb-24 pt-4"
+        contentContainerClassName="pt-4 pb-6 android:pb-24"
         ListEmptyComponent={isActive ? <MedicineFilterEmptyState /> : undefined}
         renderItem={({ item }) => (
           <MedicineCard item={item} onPress={() => openMedicine(item.id)} />
         )}
       />
-      <Fab
-        onPress={openNew}
-        accessibilityLabel={t("medicineList.addMedicine")}
-      />
+      <AddMedicineFab onPress={openNew} />
     </View>
   );
 }
