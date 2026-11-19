@@ -3,7 +3,6 @@ import { Pressable, Text, View } from "react-native";
 
 import { formatDate, formatDaysLeft } from "@/i18n/format";
 import { cn } from "@/lib/cn";
-import { daysUntil } from "@/lib/dates";
 
 import {
   STATUS_DOT_CLASS,
@@ -44,7 +43,7 @@ export function MedicineCard({ item, onPress }: MedicineCardProps) {
         <Text className="mt-0.5 text-sm text-muted">
           {formatMedicineSubtitle(item)}
         </Text>
-        {item.nearestExpiry ? (
+        {item.nearestExpiry && item.daysLeft !== null ? (
           <Text
             className={cn(
               "mt-2 text-sm font-medium",
@@ -52,7 +51,7 @@ export function MedicineCard({ item, onPress }: MedicineCardProps) {
             )}
           >
             {t("expiry.until", { date: formatDate(item.nearestExpiry) })} ·{" "}
-            {formatDaysLeft(daysUntil(item.nearestExpiry))}
+            {formatDaysLeft(item.daysLeft)}
           </Text>
         ) : (
           <Text className="mt-2 text-sm text-muted">

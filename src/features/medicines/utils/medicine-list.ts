@@ -1,23 +1,23 @@
-import type { Medicine, MedicineTag, Package } from "@/db/schema";
-import { getExpiryStatus } from "@/lib/dates";
+import { daysUntil, getExpiryStatus } from "@/lib/dates";
 
-import type { MedicineListItem } from "../types/medicine-types";
+import type {
+  BuildMedicineListInput,
+  MedicineListItem,
+} from "../types/medicine-types";
 
 /*
  * Pure list logic (no React, no DB): combines rows from the live queries into
  * list items, and filters them.
  */
 
-type ActivePackageRow = Pick<Package, "medicineId" | "expiryDate" | "quantity">;
-
 /** Builds list items sorted by nearest expiry; medicines without active packages go last. */
-export function buildMedicineList(
-  medicines: Medicine[],
-  activePackages: ActivePackageRow[],
-  links: MedicineTag[],
-  options: { today?: Date; locale?: string } = {},
-): MedicineListItem[] {
-  const today = options.today ?? new Date();
+export function buildMedicineList({
+  medicines,
+  activePackages,
+  links,
+  today,
+  locale,
+}: BuildMedicineListInput): MedicineListItem[] {
   const nearest = new Map<number, string>();
   const counts = new Map<number, number>();
   const tagsByMedicine = new Map<number, number[]>();
@@ -44,6 +44,7 @@ export function buildMedicineList(
       packCount: counts.get(m.id) ?? 0,
       tagIds: tagsByMedicine.get(m.id) ?? [],
       status: nearestExpiry ? getExpiryStatus(nearestExpiry, today) : "none",
+      daysLeft: nearestExpiry ? daysUntil(nearestExpiry, today) : null,
     };
   });
 
@@ -53,7 +54,7 @@ export function buildMedicineList(
       if (!b.nearestExpiry) return -1;
       return a.nearestExpiry < b.nearestExpiry ? -1 : 1;
     }
-    return a.name.localeCompare(b.name, options.locale);
+    return a.name.localeCompare(b.name, locale);
   });
 }
 

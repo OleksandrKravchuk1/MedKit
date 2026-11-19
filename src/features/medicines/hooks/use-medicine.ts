@@ -5,14 +5,17 @@ import { useMemo } from "react";
 import { db } from "@/db/client";
 import { medicines, medicineTags, packages } from "@/db/schema";
 import { useTags } from "@/features/tags/hooks/use-tags";
+import { daysUntil, getExpiryStatus } from "@/lib/dates";
 
 import type { MedicineDetails } from "../types/medicine-types";
+import { useToday } from "./use-today";
 
 /**
  * Live details of one medicine: the medicine, its packages (active/archived)
  * and tags. One live query per table, see useMedicineList.
  */
 export function useMedicine(id: number) {
+  const today = useToday();
   const med = useLiveQuery(
     db.select().from(medicines).where(eq(medicines.id, id)),
     [id],
@@ -40,11 +43,17 @@ export function useMedicine(id: number) {
     const tagIds = new Set(links.data.map((l) => l.tagId));
     return {
       medicine,
-      activePackages: pkgs.data.filter((p) => p.status === "active"),
+      activePackages: pkgs.data
+        .filter((p) => p.status === "active")
+        .map((p) => ({
+          ...p,
+          expiryStatus: getExpiryStatus(p.expiryDate, today),
+          daysLeft: daysUntil(p.expiryDate, today),
+        })),
       archivedPackages: pkgs.data.filter((p) => p.status !== "active"),
       tags: allTags.data.filter((t) => tagIds.has(t.id)),
     };
-  }, [med.data, pkgs.data, links.data, allTags.data]);
+  }, [med.data, pkgs.data, links.data, allTags.data, today]);
 
   return {
     data,
