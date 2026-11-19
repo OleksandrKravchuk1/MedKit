@@ -1,13 +1,9 @@
 import {
-  Button,
   DatePicker,
   Form,
-  HStack,
   Host,
-  Image,
   Picker,
   Section,
-  Spacer,
   Stepper,
   Text,
   TextField,
@@ -29,6 +25,7 @@ import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { MEDICINE_FORMS, type MedicineForm } from "@/constants/medicine";
+import { TagSelectRow } from "@/features/tags/components/tag-select-row";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 import { parseIsoDate, toIsoDate, toLastDayOfMonth } from "@/lib/dates";
@@ -84,10 +81,6 @@ export function MedicineFormFields({
       </Text>
     ) : undefined;
 
-  const primaryText = foregroundStyle({
-    type: "hierarchical",
-    style: "primary",
-  });
   const secondaryText = foregroundStyle({
     type: "hierarchical",
     style: "secondary",
@@ -192,34 +185,19 @@ export function MedicineFormFields({
           </Section>
         ) : null}
 
-        {tags.length > 0 ? (
+        {tags.length > 0 && (
           <Section title={t("medicineForm.tags")}>
             {tags.map((item) => (
-              <Button
+              <TagSelectRow
                 key={item.id}
+                tag={item}
+                selected={tagIds.field.value.includes(item.id)}
                 onPress={() => toggleTag(item.id)}
-                modifiers={[disabled(locked)]}
-              >
-                <HStack spacing={12}>
-                  <Image
-                    systemName="circle.fill"
-                    color={item.color}
-                    size={12}
-                  />
-                  <Text modifiers={[primaryText]}>{item.name}</Text>
-                  <Spacer />
-                  {tagIds.field.value.includes(item.id) ? (
-                    <Image
-                      systemName="checkmark"
-                      color={colors.primary}
-                      size={15}
-                    />
-                  ) : null}
-                </HStack>
-              </Button>
+                disabled={locked}
+              />
             ))}
           </Section>
-        ) : null}
+        )}
 
         <Section footer={footerError(errors.notes?.message)}>
           <TextField

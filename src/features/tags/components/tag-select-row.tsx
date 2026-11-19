@@ -5,30 +5,33 @@ import type { Tag } from "@/db/schema";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 import { cn } from "@/lib/cn";
 
-type TagFilterRowProps = {
+export type TagSelectRowProps = {
   tag: Pick<Tag, "name" | "color">;
   selected: boolean;
   onPress: () => void;
-  /** Draws the separator above the row (all rows except the first). */
+  disabled?: boolean;
+  /** Android: draws the separator above the row (all rows except the first). */
   separator?: boolean;
 };
 
 /** Row of a grouped list: colour dot, tag name and a checkmark when selected. */
-export function TagFilterRow({
+export function TagSelectRow({
   tag,
   selected,
   onPress,
+  disabled = false,
   separator = false,
-}: TagFilterRowProps) {
+}: TagSelectRowProps) {
   const { colors } = useThemeColors();
 
   return (
     <Pressable
       accessibilityRole="checkbox"
-      accessibilityState={{ checked: selected }}
+      accessibilityState={{ checked: selected, disabled }}
       accessibilityLabel={tag.name}
       onPress={onPress}
-      className="active:bg-subtle"
+      disabled={disabled}
+      className={cn("active:bg-subtle", disabled && "opacity-50")}
     >
       <View
         className={cn(

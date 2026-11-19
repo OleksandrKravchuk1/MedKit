@@ -1,5 +1,6 @@
 import { router, Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { Platform } from "react-native";
 
 import { MedicineFilterProvider } from "@/features/medicines/hooks/use-medicine-filter";
 import { useMedicinesHeaderOptions } from "@/features/medicines/hooks/use-medicines-header-options";
@@ -21,6 +22,8 @@ function MedicinesStack() {
     onOpenFilters: () => router.push("/filters"),
   });
 
+  const isIos = Platform.OS === "ios";
+
   return (
     <Stack>
       <Stack.Screen
@@ -35,7 +38,7 @@ function MedicinesStack() {
         name="filters"
         options={{
           presentation: "formSheet",
-          sheetAllowedDetents: "fitToContents",
+          sheetAllowedDetents: isIos ? [0.6, 1] : "fitToContents",
           sheetGrabberVisible: true,
           headerShown: false,
           contentStyle: { backgroundColor: colors.background },
