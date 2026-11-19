@@ -4,24 +4,19 @@ import { Pressable, Text, View } from "react-native";
 
 import { DatePicker } from "@/components/form/date-picker";
 import { Button } from "@/components/ui/button";
-import type { Package } from "@/db/schema";
 import { formatDate, formatDaysLeft } from "@/i18n/format";
 import { cn } from "@/lib/cn";
-import {
-  daysUntil,
-  getExpiryStatus,
-  parseIsoDate,
-  toIsoDate,
-} from "@/lib/dates";
+import { parseIsoDate, toIsoDate } from "@/lib/dates";
 
 import {
   STATUS_DOT_CLASS,
   STATUS_TEXT_CLASS,
 } from "../../constants/expiry-status-classes";
+import type { ActivePackage } from "../../types/medicine-types";
 import { formatPackageDetails } from "../../utils/medicine-display";
 
 type ActivePackageRowProps = {
-  pkg: Package;
+  pkg: ActivePackage;
   onUsed: () => void;
   onDiscarded: () => void;
   onChangeExpiry: (iso: string) => void;
@@ -36,7 +31,7 @@ export function ActivePackageRow({
 }: ActivePackageRowProps) {
   const { t } = useTranslation();
   const [pickerOpen, setPickerOpen] = useState(false);
-  const status = getExpiryStatus(pkg.expiryDate);
+  const status = pkg.expiryStatus;
   const details = formatPackageDetails(pkg);
 
   return (
@@ -72,7 +67,7 @@ export function ActivePackageRow({
           )}
         />
         <Text className={cn("text-sm", STATUS_TEXT_CLASS[status])}>
-          {formatDaysLeft(daysUntil(pkg.expiryDate))}
+          {formatDaysLeft(pkg.daysLeft)}
           {details ? <Text className="text-muted"> · {details}</Text> : null}
         </Text>
       </View>

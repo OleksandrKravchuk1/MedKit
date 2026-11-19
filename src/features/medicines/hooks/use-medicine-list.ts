@@ -7,6 +7,7 @@ import { medicines, medicineTags, packages } from "@/db/schema";
 import { getCurrentLanguage } from "@/i18n";
 
 import { buildMedicineList } from "../utils/medicine-list";
+import { useToday } from "./use-today";
 
 /**
  * Live medicines list with aggregated package data.
@@ -14,6 +15,7 @@ import { buildMedicineList } from "../utils/medicine-list";
  * not tracked), so each table gets its own live query, combined in JS.
  */
 export function useMedicineList() {
+  const today = useToday();
   const meds = useLiveQuery(db.select().from(medicines));
   const activePackages = useLiveQuery(
     db
@@ -29,10 +31,14 @@ export function useMedicineList() {
 
   const data = useMemo(
     () =>
-      buildMedicineList(meds.data, activePackages.data, links.data, {
+      buildMedicineList({
+        medicines: meds.data,
+        activePackages: activePackages.data,
+        links: links.data,
+        today,
         locale: getCurrentLanguage(),
       }),
-    [meds.data, activePackages.data, links.data],
+    [meds.data, activePackages.data, links.data, today],
   );
 
   return {

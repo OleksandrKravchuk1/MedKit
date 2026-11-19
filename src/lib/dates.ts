@@ -35,15 +35,12 @@ export function toLastDayOfMonth(iso: string): string {
 }
 
 /** Calendar days from today until expiry; negative when already expired. */
-export function daysUntil(iso: string, today: Date = new Date()): number {
-  return differenceInCalendarDays(parseIsoDate(iso), today);
+export function daysUntil(iso: string, today: string): number {
+  return differenceInCalendarDays(parseIsoDate(iso), parseIsoDate(today));
 }
 
 /** A medicine is usable through its expiry date and expired from the next day. */
-export function getExpiryStatus(
-  iso: string,
-  today: Date = new Date(),
-): ExpiryStatus {
+export function getExpiryStatus(iso: string, today: string): ExpiryStatus {
   const days = daysUntil(iso, today);
   if (days < 0) return "expired";
   if (days <= SOON_THRESHOLD_DAYS) return "soon";
