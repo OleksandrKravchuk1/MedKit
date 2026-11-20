@@ -16,7 +16,7 @@ import {
 } from "@/constants/settings";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { useThemeColors } from "@/hooks/use-theme-colors";
-import i18n, { detectDeviceLanguage } from "@/i18n";
+import { applyLanguage } from "@/i18n";
 import { formatRemindDaysBefore } from "@/i18n/format";
 import { runSafely } from "@/lib/alerts";
 import { timeToDate } from "@/lib/dates";
@@ -56,9 +56,7 @@ export function SettingsScreenView() {
 
   const changeLanguage = (value: LanguageSetting) => {
     runSafely(() => setLanguage(value));
-    void i18n.changeLanguage(
-      value === "system" ? detectDeviceLanguage() : value,
-    );
+    void applyLanguage(value);
   };
 
   return (

@@ -1,7 +1,12 @@
 import { LoadingView } from "@/components/feedback/loading-view";
-import { LANGUAGE_SETTINGS, LanguageSetting } from "@/constants/settings";
+import {
+  LANGUAGE_SETTINGS,
+  LanguageSetting,
+  REMIND_DAYS_MAX,
+  REMIND_DAYS_MIN,
+} from "@/constants/settings";
 import { useTags } from "@/features/tags/hooks/use-tags";
-import i18n, { detectDeviceLanguage } from "@/i18n";
+import { applyLanguage } from "@/i18n";
 import { formatRemindDaysBefore } from "@/i18n/format";
 import { runSafely } from "@/lib/alerts";
 import { timeToDate } from "@/lib/dates";
@@ -79,8 +84,8 @@ export function SettingsScreenView() {
           <Stepper
             label={formatRemindDaysBefore(settings.remindDaysBefore)}
             value={settings.remindDaysBefore}
-            min={1}
-            max={60}
+            min={REMIND_DAYS_MIN}
+            max={REMIND_DAYS_MAX}
             step={1}
             onValueChange={(days) => runSafely(() => setRemindDaysBefore(days))}
           />
@@ -99,9 +104,7 @@ export function SettingsScreenView() {
             selection={settings.language}
             onSelectionChange={(value) => {
               runSafely(() => setLanguage(value));
-              void i18n.changeLanguage(
-                value === "system" ? detectDeviceLanguage() : value,
-              );
+              void applyLanguage(value);
             }}
             modifiers={[pickerStyle("menu")]}
           >

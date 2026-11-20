@@ -2,6 +2,8 @@ import { getLocales } from "expo-localization";
 import { createInstance } from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import type { LanguageSetting } from "@/constants/settings";
+
 import en from "./locales/en.json";
 import uk from "./locales/uk.json";
 
@@ -41,6 +43,16 @@ void i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
   initAsync: false,
 });
+
+/**
+ * Switches the UI to the language chosen in settings ("system" follows the
+ * device). Screens re-render through react-i18next.
+ */
+export function applyLanguage(setting: LanguageSetting): Promise<unknown> {
+  return i18n.changeLanguage(
+    setting === "system" ? detectDeviceLanguage() : setting,
+  );
+}
 
 export function getCurrentLanguage(): AppLanguage {
   return isSupported(i18n.language) ? i18n.language : FALLBACK_LANGUAGE;
