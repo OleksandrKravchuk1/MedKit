@@ -14,6 +14,7 @@ import {
   REMIND_DAYS_MIN,
   type LanguageSetting,
 } from "@/constants/settings";
+import { useConfirmDeleteTag } from "@/features/tags/hooks/use-confirm-delete-tag";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 import { applyLanguage } from "@/i18n";
@@ -30,13 +31,20 @@ import {
 import { SettingsRow } from "./settings-row";
 import { SettingsSection } from "./settings-section";
 
-const noop = () => {};
+export type SettingsScreenViewProps = {
+  onOpenTag: (id: number) => void;
+  onAddTag: () => void;
+};
 
 /** Android: settings as Material-style cards of rows. */
-export function SettingsScreenView() {
+export function SettingsScreenView({
+  onOpenTag,
+  onAddTag,
+}: SettingsScreenViewProps) {
   const { t } = useTranslation();
   const { scheme, colors } = useThemeColors();
   const { data: tags } = useTags();
+  const confirmDeleteTag = useConfirmDeleteTag();
   const { data: settings, isLoading } = useSettings();
   const [timePickerOpen, setTimePickerOpen] = useState(false);
 
@@ -136,7 +144,7 @@ export function SettingsScreenView() {
           <SettingsRow
             key={item.id}
             label={item.name}
-            onPress={noop}
+            onPress={() => onOpenTag(item.id)}
             leading={
               <View
                 className="h-3 w-3 rounded-full"
@@ -148,7 +156,7 @@ export function SettingsScreenView() {
                 accessibilityRole="button"
                 accessibilityLabel={t("settings.deleteTag")}
                 hitSlop={12}
-                onPress={noop}
+                onPress={() => confirmDeleteTag(item)}
                 className="active:opacity-60"
               >
                 <SymbolView
@@ -162,7 +170,7 @@ export function SettingsScreenView() {
         ))}
         <SettingsRow
           label={t("settings.addTag")}
-          onPress={noop}
+          onPress={onAddTag}
           leading={
             <SymbolView
               name={{ ios: "plus", android: "add", web: "add" }}

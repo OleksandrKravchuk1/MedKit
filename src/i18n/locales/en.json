@@ -178,6 +178,9 @@
     "newTitle": "New tag",
     "editTitle": "Edit tag",
     "name": "Name",
-    "color": "Color"
+    "color": "Color",
+    "saveFailed": "Could not save the tag",
+    "loadFailed": "Could not load the tag",
+    "notFound": "Tag not found"
   }
 }

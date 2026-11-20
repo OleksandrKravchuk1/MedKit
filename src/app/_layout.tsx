@@ -95,6 +95,20 @@ export default function RootLayout() {
               }}
             />
             <Stack.Screen
+              name="tag/new"
+              options={{
+                presentation: "modal",
+                title: t("tagEditor.newTitle"),
+              }}
+            />
+            <Stack.Screen
+              name="tag/[id]"
+              options={{
+                presentation: "modal",
+                title: t("tagEditor.editTitle"),
+              }}
+            />
+            <Stack.Screen
               name="scanner"
               options={{
                 presentation: "modal",

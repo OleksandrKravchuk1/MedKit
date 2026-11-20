@@ -5,6 +5,7 @@ import {
   REMIND_DAYS_MAX,
   REMIND_DAYS_MIN,
 } from "@/constants/settings";
+import { useConfirmDeleteTag } from "@/features/tags/hooks/use-confirm-delete-tag";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { applyLanguage } from "@/i18n";
 import { formatRemindDaysBefore } from "@/i18n/format";
@@ -39,6 +40,7 @@ import {
   setNotifyTime,
   setRemindDaysBefore,
 } from "../mutations/settings-mutations";
+import type { SettingsScreenViewProps } from "./settings-screen-view";
 
 const primaryText = foregroundStyle({
   type: "hierarchical",
@@ -53,11 +55,13 @@ const tertiaryText = foregroundStyle({
   style: "tertiary",
 });
 
-const noop = () => {};
-
-export function SettingsScreenView() {
+export function SettingsScreenView({
+  onOpenTag,
+  onAddTag,
+}: SettingsScreenViewProps) {
   const { t } = useTranslation();
   const { data: tags } = useTags();
+  const confirmDeleteTag = useConfirmDeleteTag();
   const { data: settings, isLoading } = useSettings();
 
   const version = Constants.expoConfig?.version;
@@ -124,7 +128,7 @@ export function SettingsScreenView() {
         >
           {tags.map((item) => (
             <SwipeActions key={item.id}>
-              <Button onPress={noop}>
+              <Button onPress={() => onOpenTag(item.id)}>
                 <HStack spacing={12}>
                   <Image
                     systemName="circle.fill"
@@ -145,7 +149,7 @@ export function SettingsScreenView() {
                   label={t("settings.deleteTag")}
                   systemImage="trash"
                   role="destructive"
-                  onPress={noop}
+                  onPress={() => confirmDeleteTag(item)}
                 />
               </SwipeActions.Actions>
             </SwipeActions>
@@ -153,7 +157,7 @@ export function SettingsScreenView() {
           <Button
             label={t("settings.addTag")}
             systemImage="plus.circle.fill"
-            onPress={noop}
+            onPress={onAddTag}
           />
         </Section>
 
