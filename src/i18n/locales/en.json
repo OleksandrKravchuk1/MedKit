@@ -124,7 +124,13 @@
     "delete": "Delete medicine",
     "deleteConfirmTitle": "Delete medicine?",
     "deleteConfirmMessage": "“{{name}}” and all its packages will be deleted permanently.",
-    "deleteConfirm": "Delete"
+    "deleteConfirm": "Delete",
+    "form": "Form",
+    "dosage": "Dosage",
+    "tags": "Tags",
+    "notes": "Notes",
+    "addPackageAction": "Add package",
+    "packagesFooter": "Swipe a package left to mark it used or discarded. Tap the date to change it."
   },
   "package": {
     "markUsed": "Used up",

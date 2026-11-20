@@ -7,8 +7,8 @@ import { medicines, medicineTags, packages } from "@/db/schema";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { daysUntil, getExpiryStatus } from "@/lib/dates";
 
-import type { MedicineDetails } from "../types/medicine-types";
-import { useToday } from "./use-today";
+import type { MedicineDetails } from "../../types/medicine-types";
+import { useToday } from "@/hooks/use-today";
 
 /**
  * Live details of one medicine: the medicine, its packages (active/archived)

@@ -7,8 +7,8 @@ import { StateView } from "@/components/feedback/state-view";
 import { MedicineFilterEmptyState } from "@/features/medicines/components/filter/medicine-filter-empty-state";
 import { AddMedicineFab } from "@/features/medicines/components/list/add-medicine-fab";
 import { MedicineCard } from "@/features/medicines/components/list/medicine-card";
-import { useMedicineFilter } from "@/features/medicines/hooks/use-medicine-filter";
-import { useMedicineList } from "@/features/medicines/hooks/use-medicine-list";
+import { useMedicineFilter } from "@/features/medicines/hooks/list/use-medicine-filter";
+import { useMedicineList } from "@/features/medicines/hooks/list/use-medicine-list";
 import { filterMedicines } from "@/features/medicines/utils/medicine-list";
 
 export default function MedicinesScreen() {

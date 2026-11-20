@@ -37,7 +37,7 @@ export function deleteTag(id: number): void {
 function normalize({ name, color }: TagInput): TagInput {
   return {
     name: name.trim(),
-    color: color.toUpperCase()
+    color: color.toUpperCase(),
   };
 }
 

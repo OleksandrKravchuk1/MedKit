@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { SheetCloseButton } from "@/components/ui/sheet-close-button";
 import { TagSelectRow } from "@/features/tags/components/tag-select-row";
 
-import { useMedicineFilter } from "../../hooks/use-medicine-filter";
+import { useMedicineFilter } from "../../hooks/list/use-medicine-filter";
 
 const EDGE_GAP = 20;
 

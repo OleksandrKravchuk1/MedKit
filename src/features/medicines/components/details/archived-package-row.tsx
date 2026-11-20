@@ -7,7 +7,7 @@ import { formatDate } from "@/i18n/format";
 
 import { formatPackageDetails } from "../../utils/medicine-display";
 
-type ArchivedPackageRowProps = {
+export type ArchivedPackageRowProps = {
   pkg: Package;
   onRestore: () => void;
 };

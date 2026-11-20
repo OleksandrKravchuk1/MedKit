@@ -9,7 +9,7 @@ import {
   toFormValues,
   toMedicineInput,
 } from "@/features/medicines/utils/medicine-form-mappers";
-import { useMedicine } from "@/features/medicines/hooks/use-medicine";
+import { useMedicine } from "@/features/medicines/hooks/details/use-medicine";
 import { runSafely } from "@/lib/alerts";
 
 export default function EditMedicineScreen() {

@@ -2,8 +2,8 @@ import { router, Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
 
-import { MedicineFilterProvider } from "@/features/medicines/hooks/use-medicine-filter";
-import { useMedicinesHeaderOptions } from "@/features/medicines/hooks/use-medicines-header-options";
+import { MedicineFilterProvider } from "@/features/medicines/hooks/list/use-medicine-filter";
+import { useMedicinesHeaderOptions } from "@/features/medicines/hooks/list/use-medicines-header-options";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 
 export default function MedicinesTabLayout() {
