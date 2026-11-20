@@ -39,3 +39,9 @@ export function formatDaysLeft(days: number): string {
     ? i18n.t(`expiry.daysLeft.${category}`, { n: count })
     : i18n.t(`expiry.expiredAgo.${category}`, { n: count });
 }
+
+/** 'За 7 днів' / '7 days before' (settings: how early to remind). */
+export function formatRemindDaysBefore(days: number): string {
+  const category = pluralCategory(getCurrentLanguage(), days);
+  return i18n.t(`settings.remindDaysBefore.${category}`, { n: days });
+}

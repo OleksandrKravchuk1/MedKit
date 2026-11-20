@@ -19,7 +19,7 @@ MVP повністю офлайн: без бекенду й акаунтів, д
 - i18next + react-i18next + expo-localization (uk, en)
 - NativeWind (вже налаштований), семантичні кольори через CSS-змінні
 - react-native-keyboard-controller (форми: `FormScrollView`)
-- @expo/ui (DateTimePicker)
+- @expo/ui: swift-ui для UI iOS
 - НЕ використовувати: TanStack Query, Redux, Zustand, будь-який бекенд
 - Розробка в development build (expo-dev-client), не в Expo Go
 

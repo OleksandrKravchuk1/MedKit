@@ -13,6 +13,7 @@ import { StateView } from "@/components/feedback/state-view";
 import { DEFAULT_TAGS } from "@/constants/tags";
 import { navigationThemes } from "@/constants/theme";
 import { useDatabaseReady } from "@/db/use-database-ready";
+import { useApplySavedLanguage } from "@/features/settings/hooks/use-apply-saved-language";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 // Importing @/i18n also initializes it, before any screen renders.
 import i18n from "@/i18n";
@@ -43,7 +44,9 @@ const getDefaultTags = () =>
 export default function RootLayout() {
   const { t } = useTranslation();
   const { scheme, colors } = useThemeColors();
-  const { ready, error } = useDatabaseReady(getDefaultTags);
+  const { ready: databaseReady, error } = useDatabaseReady(getDefaultTags);
+  const languageReady = useApplySavedLanguage(databaseReady);
+  const ready = databaseReady && languageReady;
 
   useEffect(() => {
     if (ready || error) SplashScreen.hide();
@@ -89,6 +92,20 @@ export default function RootLayout() {
               options={{
                 presentation: "modal",
                 title: t("navigation.editMedicine"),
+              }}
+            />
+            <Stack.Screen
+              name="tag/new"
+              options={{
+                presentation: "modal",
+                title: t("tagEditor.newTitle"),
+              }}
+            />
+            <Stack.Screen
+              name="tag/[id]"
+              options={{
+                presentation: "modal",
+                title: t("tagEditor.editTitle"),
               }}
             />
             <Stack.Screen

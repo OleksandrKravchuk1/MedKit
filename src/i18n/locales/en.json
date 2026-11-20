@@ -107,7 +107,9 @@
     "quantityRequired": "Enter a quantity",
     "quantityInteger": "Must be a whole number",
     "quantityMin": "At least 1",
-    "quantityMax": "No more than 999"
+    "quantityMax": "No more than 999",
+    "tagNameTaken": "A tag with this name already exists",
+    "invalidColor": "Invalid color"
   },
   "medicineDetails": {
     "loadFailed": "Could not load the medicine",
@@ -147,5 +149,38 @@
     "showDetails": "Show details",
     "hideDetails": "Hide details",
     "pullToRetry": "or pull down to retry"
+  },
+  "settings": {
+    "sectionReminders": "Reminders",
+    "remindDaysBefore": {
+      "one": "{{n}} day before",
+      "few": "{{n}} days before",
+      "many": "{{n}} days before",
+      "other": "{{n}} days before"
+    },
+    "notifyTime": "Notification time",
+    "remindersFooter": "The notification arrives at the chosen time the set number of days before the expiry date.",
+    "sectionLanguage": "Language",
+    "language": "App language",
+    "languageSystem": "System",
+    "languageUk": "Українська",
+    "languageEn": "English",
+    "sectionTags": "Tags",
+    "tagsFooter": "Swipe left to delete a tag.",
+    "addTag": "Add tag",
+    "deleteTag": "Delete",
+    "deleteTagConfirmTitle": "Delete tag?",
+    "deleteTagConfirmMessage": "The tag “{{name}}” will be removed from all medicines.",
+    "sectionAbout": "About",
+    "version": "Version"
+  },
+  "tagEditor": {
+    "newTitle": "New tag",
+    "editTitle": "Edit tag",
+    "name": "Name",
+    "color": "Color",
+    "saveFailed": "Could not save the tag",
+    "loadFailed": "Could not load the tag",
+    "notFound": "Tag not found"
   }
 }

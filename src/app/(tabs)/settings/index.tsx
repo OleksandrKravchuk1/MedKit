@@ -1,8 +1,14 @@
-import { useTranslation } from "react-i18next";
+import { router } from "expo-router";
 
-import { PlaceholderScreen } from "@/components/feedback/placeholder-screen";
+import { SettingsScreenView } from "@/features/settings/components/settings-screen-view";
 
 export default function SettingsScreen() {
-  const { t } = useTranslation();
-  return <PlaceholderScreen title={t("navigation.settings")} stage={3} />;
+  return (
+    <SettingsScreenView
+      onOpenTag={(id) =>
+        router.push({ pathname: "/tag/[id]", params: { id: String(id) } })
+      }
+      onAddTag={() => router.push("/tag/new")}
+    />
+  );
 }
