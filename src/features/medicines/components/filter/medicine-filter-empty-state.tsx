@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { StateView } from "@/components/feedback/state-view";
 import { Button } from "@/components/ui/button";
 
-import { useMedicineFilter } from "../../hooks/use-medicine-filter";
+import { useMedicineFilter } from "../../hooks/list/use-medicine-filter";
 
 /** Shown in the medicines list when the tag filter matches nothing. */
 export function MedicineFilterEmptyState() {

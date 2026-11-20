@@ -5,7 +5,7 @@ import { TagBadge } from "@/features/tags/components/tag-badge";
 
 import { formatMedicineSubtitle } from "../../utils/medicine-display";
 
-type MedicineSummaryProps = {
+export type MedicineSummaryProps = {
   medicine: Medicine;
   tags: Tag[];
 };

@@ -9,7 +9,7 @@ import { Text as RNText, View } from "react-native";
 import { SheetCloseButton } from "@/components/ui/sheet-close-button";
 import { TagSelectRow } from "@/features/tags/components/tag-select-row";
 
-import { useMedicineFilter } from "../../hooks/use-medicine-filter";
+import { useMedicineFilter } from "../../hooks/list/use-medicine-filter";
 import type { MedicineFilterSheetProps } from "./medicine-filter-sheet";
 
 const secondaryText = foregroundStyle({

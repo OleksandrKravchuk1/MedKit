@@ -6,8 +6,8 @@ import { db } from "@/db/client";
 import { medicines, medicineTags, packages } from "@/db/schema";
 import { getCurrentLanguage } from "@/i18n";
 
-import { buildMedicineList } from "../utils/medicine-list";
-import { useToday } from "./use-today";
+import { buildMedicineList } from "../../utils/medicine-list";
+import { useToday } from "@/hooks/use-today";
 
 /**
  * Live medicines list with aggregated package data.

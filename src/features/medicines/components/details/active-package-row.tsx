@@ -15,7 +15,7 @@ import {
 import type { ActivePackage } from "../../types/medicine-types";
 import { formatPackageDetails } from "../../utils/medicine-display";
 
-type ActivePackageRowProps = {
+export type ActivePackageRowProps = {
   pkg: ActivePackage;
   onUsed: () => void;
   onDiscarded: () => void;

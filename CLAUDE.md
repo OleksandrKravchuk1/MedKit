@@ -19,7 +19,7 @@ MVP повністю офлайн: без бекенду й акаунтів, д
 - i18next + react-i18next + expo-localization (uk, en)
 - NativeWind (вже налаштований), семантичні кольори через CSS-змінні
 - react-native-keyboard-controller (форми: `FormScrollView`)
-- @expo/ui: swift-ui для UI iOS
+- @expo/ui: swift-ui для UI iOS версії застосунку
 - НЕ використовувати: TanStack Query, Redux, Zustand, будь-який бекенд
 - Розробка в development build (expo-dev-client), не в Expo Go
 
@@ -36,7 +36,7 @@ src/
     form/       # поля форм: text-field, date-field, date-picker, stepper, field, form-scroll-view
     feedback/   # стани: state-view, loading-view, placeholder-screen
   constants/    # доменні значення (medicine, settings, tags) і тема (theme.ts)
-  hooks/        # спільні хуки (use-theme-colors)
+  hooks/        # спільні хуки без доменної логіки: use-theme-colors, use-today, use-form-header-buttons
   i18n/         # index.ts, format.ts, plural.ts, locales/{uk,en}.json
 drizzle/        # згенеровані міграції (корінь)
 drizzle.config.ts  # schema: './src/db/schema.ts', out: './drizzle', dialect: 'sqlite', driver: 'expo'
@@ -54,7 +54,8 @@ features/<feature>/
   components/   # React-компоненти, один на файл, у підпапках за частиною UI:
                 #   list/, filter/, form/, details/ (form/medicine-form.tsx)
   hooks/        # хуки фічі, один на файл: читання (use-medicine-list.ts),
-                #   спільний стан-контекст (use-medicine-filter.tsx), опції екрана
+                #   спільний стан-контекст (use-medicine-filter.tsx), опції екрана;
+                #   коли їх багато — підпапки як у components/ (list/, details/)
   mutations/    # записи в БД, файл на сутність: medicine-mutations.ts, package-mutations.ts
   schemas/      # zod-схеми: medicine-form-schema.ts
   constants/    # константи фічі, дефолти форм, класи кольорів: medicine-form-constants.ts

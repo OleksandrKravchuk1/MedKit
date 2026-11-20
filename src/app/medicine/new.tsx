@@ -12,7 +12,7 @@ import {
   toMedicineInput,
   toPackageInput,
 } from "@/features/medicines/utils/medicine-form-mappers";
-import { useMedicine } from "@/features/medicines/hooks/use-medicine";
+import { useMedicine } from "@/features/medicines/hooks/details/use-medicine";
 import { runSafely } from "@/lib/alerts";
 
 /**
