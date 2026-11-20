@@ -29,6 +29,23 @@ export function isIsoDate(value: string): boolean {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) && isValid(parseISO(value));
 }
 
+/**
+ * "HH:mm" → Date of today at that time (seconds and ms zeroed).
+ * DatePicker with displayedComponents={["hourAndMinute"]} works with Date,
+ * the settings table stores "HH:mm".
+ */
+export function timeToDate(time: string): Date {
+  const [hours, minutes] = time.split(":").map(Number);
+  const date = new Date();
+  date.setHours(hours, minutes, 0, 0);
+  return date;
+}
+
+/** Date → "HH:mm" (24-hour, zero-padded), e.g. 9:05 → "09:05". */
+export function dateToTime(date: Date): string {
+  return format(date, "HH:mm");
+}
+
 /** Used when only month and year of expiry are known. */
 export function toLastDayOfMonth(iso: string): string {
   return toIsoDate(endOfMonth(parseIsoDate(iso)));

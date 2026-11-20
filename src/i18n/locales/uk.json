@@ -107,7 +107,9 @@
     "quantityRequired": "Вкажіть кількість",
     "quantityInteger": "Потрібне ціле число",
     "quantityMin": "Щонайменше 1",
-    "quantityMax": "Не більше 999"
+    "quantityMax": "Не більше 999",
+    "tagNameTaken": "Тег з такою назвою вже існує",
+    "invalidColor": "Некоректний колір"
   },
   "medicineDetails": {
     "loadFailed": "Не вдалося завантажити препарат",
@@ -147,5 +149,35 @@
     "showDetails": "Показати деталі",
     "hideDetails": "Сховати деталі",
     "pullToRetry": "або потягніть екран вниз"
+  },
+  "settings": {
+    "sectionReminders": "Нагадування",
+    "remindDaysBefore": {
+      "one": "За {{n}} день",
+      "few": "За {{n}} дні",
+      "many": "За {{n}} днів",
+      "other": "За {{n}} дня"
+    },
+    "notifyTime": "Час сповіщення",
+    "remindersFooter": "Сповіщення прийде у вибраний час за вказану кількість днів до кінця строку придатності.",
+    "sectionLanguage": "Мова",
+    "language": "Мова застосунку",
+    "languageSystem": "Системна",
+    "languageUk": "Українська",
+    "languageEn": "English",
+    "sectionTags": "Теги",
+    "tagsFooter": "Проведіть ліворуч, щоб видалити тег.",
+    "addTag": "Додати тег",
+    "deleteTag": "Видалити",
+    "deleteTagConfirmTitle": "Видалити тег?",
+    "deleteTagConfirmMessage": "Тег «{{name}}» зникне з усіх препаратів.",
+    "sectionAbout": "Про застосунок",
+    "version": "Версія"
+  },
+  "tagEditor": {
+    "newTitle": "Новий тег",
+    "editTitle": "Редагування тегу",
+    "name": "Назва",
+    "color": "Колір"
   }
 }
