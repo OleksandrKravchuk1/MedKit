@@ -17,17 +17,13 @@ import {
 } from "@expo/ui/swift-ui/modifiers";
 import { useTranslation } from "react-i18next";
 
+import { secondaryText } from "@/constants/swift-ui-styles";
 import { formatDaysLeft } from "@/i18n/format";
 import { parseIsoDate, toIsoDate } from "@/lib/dates";
 
 import { STATUS_SYSTEM_COLOR } from "../../constants/expiry-status-colors";
 import { formatPackageDetails } from "../../utils/medicine-display";
 import type { ActivePackageRowProps } from "./active-package-row";
-
-const secondaryText = foregroundStyle({
-  type: "hierarchical",
-  style: "secondary",
-});
 
 /**
  * Active package as a SwiftUI list row: status dot, days left, details and a

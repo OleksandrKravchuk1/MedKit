@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
 import { useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,13 +16,15 @@ type TagFormProps = {
   defaultValues: TagFormValues;
   /** Saves the tag; may throw TagNameTakenError. */
   onSubmit: (values: TagFormValues) => void;
+  /** Leaves the form: after a successful save or on Cancel. */
+  onClose: () => void;
 };
 
 /**
  * Tag form: validation, Cancel / Save in the navigation bar, closes after a
  * successful save. A duplicate name is shown on the name field.
  */
-export function TagForm({ defaultValues, onSubmit }: TagFormProps) {
+export function TagForm({ defaultValues, onSubmit, onClose }: TagFormProps) {
   const { t } = useTranslation();
   const form = useForm<TagFormValues>({
     resolver: zodResolver(tagFormSchema),
@@ -37,7 +38,7 @@ export function TagForm({ defaultValues, onSubmit }: TagFormProps) {
       try {
         onSubmit(values);
         saved.current = true;
-        router.back();
+        onClose();
       } catch (e) {
         if (e instanceof TagNameTakenError) {
           form.setError("name", { message: msg("validation.tagNameTaken") });
@@ -50,7 +51,7 @@ export function TagForm({ defaultValues, onSubmit }: TagFormProps) {
   useFormHeaderButtons({
     saveLabel: t("common.save"),
     onSave: save,
-    onCancel: () => router.back(),
+    onCancel: onClose,
   });
 
   return (

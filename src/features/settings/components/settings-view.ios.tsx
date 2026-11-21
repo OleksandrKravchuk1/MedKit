@@ -1,3 +1,8 @@
+import {
+  primaryText,
+  secondaryText,
+  tertiaryText,
+} from "@/constants/swift-ui-styles";
 import { LoadingView } from "@/components/feedback/loading-view";
 import {
   LANGUAGE_SETTINGS,
@@ -26,12 +31,7 @@ import {
   SwipeActions,
   Text,
 } from "@expo/ui/swift-ui";
-import {
-  datePickerStyle,
-  foregroundStyle,
-  pickerStyle,
-  tag,
-} from "@expo/ui/swift-ui/modifiers";
+import { datePickerStyle, pickerStyle, tag } from "@expo/ui/swift-ui/modifiers";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "../hooks/use-settings";
@@ -40,25 +40,9 @@ import {
   setNotifyTime,
   setRemindDaysBefore,
 } from "../mutations/settings-mutations";
-import type { SettingsScreenViewProps } from "./settings-screen-view";
+import type { SettingsViewProps } from "./settings-view";
 
-const primaryText = foregroundStyle({
-  type: "hierarchical",
-  style: "primary",
-});
-const secondaryText = foregroundStyle({
-  type: "hierarchical",
-  style: "secondary",
-});
-const tertiaryText = foregroundStyle({
-  type: "hierarchical",
-  style: "tertiary",
-});
-
-export function SettingsScreenView({
-  onOpenTag,
-  onAddTag,
-}: SettingsScreenViewProps) {
+export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {
   const { t } = useTranslation();
   const { data: tags } = useTags();
   const confirmDeleteTag = useConfirmDeleteTag();

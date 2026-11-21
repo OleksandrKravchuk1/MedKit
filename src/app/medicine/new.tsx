@@ -36,18 +36,17 @@ function CreateMedicineForm() {
       mode="create"
       defaultValues={EMPTY_MEDICINE_FORM}
       submitLabel={t("medicineForm.submitCreate")}
-      onSubmit={(values) => {
-        const saved = runSafely(
+      onSubmit={(values) =>
+        runSafely(
           () =>
             createMedicineWithPackage(
               toMedicineInput(values),
               toPackageInput(values),
             ),
           t("medicineForm.saveFailed"),
-        );
-        if (saved) router.back();
-        return saved;
-      }}
+        )
+      }
+      onClose={() => router.back()}
     />
   );
 }
@@ -76,14 +75,13 @@ function AddPackageForm({ medicineId }: { medicineId: number }) {
       addingPackage
       defaultValues={toFormValues(medicine, tags)}
       submitLabel={t("medicineForm.submitAddPackage")}
-      onSubmit={(values) => {
-        const saved = runSafely(
+      onSubmit={(values) =>
+        runSafely(
           () => addPackage(medicine.id, toPackageInput(values)),
           t("medicineForm.saveFailed"),
-        );
-        if (saved) router.back();
-        return saved;
-      }}
+        )
+      }
+      onClose={() => router.back()}
     />
   );
 }

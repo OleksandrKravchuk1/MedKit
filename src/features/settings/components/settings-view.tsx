@@ -31,16 +31,13 @@ import {
 import { SettingsRow } from "./settings-row";
 import { SettingsSection } from "./settings-section";
 
-export type SettingsScreenViewProps = {
+export type SettingsViewProps = {
   onOpenTag: (id: number) => void;
   onAddTag: () => void;
 };
 
 /** Android: settings as Material-style cards of rows. */
-export function SettingsScreenView({
-  onOpenTag,
-  onAddTag,
-}: SettingsScreenViewProps) {
+export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {
   const { t } = useTranslation();
   const { scheme, colors } = useThemeColors();
   const { data: tags } = useTags();

@@ -1,7 +1,13 @@
 import type { ListExpiryStatus } from "../types/medicine-types";
 
-// Full literal class names so Tailwind can find them.
-// Bars/dots read fine on both themes; text needs lighter shades on dark backgrounds.
+/*
+ * Expiry status colours as NativeWind classes (React Native views, Android).
+ * iOS SwiftUI views use system colours from expiry-status-colors.ts: keep the
+ * two in step (green / amber / red / gray for ok / soon / expired / none).
+ *
+ * Full literal class names so Tailwind can find them. Bars and dots read fine
+ * on both themes; text needs lighter shades on dark backgrounds.
+ */
 
 export const STATUS_DOT_CLASS: Record<ListExpiryStatus, string> = {
   ok: "bg-green-500",

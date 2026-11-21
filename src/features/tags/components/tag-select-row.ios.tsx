@@ -1,14 +1,10 @@
 import { Button, HStack, Image, Spacer, Text } from "@expo/ui/swift-ui";
-import {
-  disabled as disabledModifier,
-  foregroundStyle,
-} from "@expo/ui/swift-ui/modifiers";
+import { disabled as disabledModifier } from "@expo/ui/swift-ui/modifiers";
 
+import { primaryText } from "@/constants/swift-ui-styles";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 
 import type { TagSelectRowProps } from "./tag-select-row";
-
-const primaryText = foregroundStyle({ type: "hierarchical", style: "primary" });
 
 /**
  * SwiftUI row of a tag list: colour dot, name and a checkmark when selected.

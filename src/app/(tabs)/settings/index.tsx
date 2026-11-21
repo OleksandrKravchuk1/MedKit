@@ -1,10 +1,10 @@
 import { router } from "expo-router";
 
-import { SettingsScreenView } from "@/features/settings/components/settings-screen-view";
+import { SettingsView } from "@/features/settings/components/settings-view";
 
 export default function SettingsScreen() {
   return (
-    <SettingsScreenView
+    <SettingsView
       onOpenTag={(id) =>
         router.push({ pathname: "/tag/[id]", params: { id: String(id) } })
       }

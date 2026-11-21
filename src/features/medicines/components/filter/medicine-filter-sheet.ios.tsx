@@ -1,21 +1,14 @@
 import { Form, Host, Section, Text } from "@expo/ui/swift-ui";
-import {
-  foregroundStyle,
-  scrollContentBackground,
-} from "@expo/ui/swift-ui/modifiers";
+import { scrollContentBackground } from "@expo/ui/swift-ui/modifiers";
 import { useTranslation } from "react-i18next";
 import { Text as RNText, View } from "react-native";
 
+import { secondaryText } from "@/constants/swift-ui-styles";
 import { SheetCloseButton } from "@/components/ui/sheet-close-button";
 import { TagSelectRow } from "@/features/tags/components/tag-select-row";
 
 import { useMedicineFilter } from "../../hooks/list/use-medicine-filter";
 import type { MedicineFilterSheetProps } from "./medicine-filter-sheet";
-
-const secondaryText = foregroundStyle({
-  type: "hierarchical",
-  style: "secondary",
-});
 
 export function MedicineFilterSheet({ onClose }: MedicineFilterSheetProps) {
   const { t } = useTranslation();

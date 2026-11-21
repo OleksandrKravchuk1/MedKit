@@ -39,14 +39,13 @@ export default function EditMedicineScreen() {
       mode="edit"
       defaultValues={toFormValues(medicine, tags)}
       submitLabel={t("medicineForm.submitEdit")}
-      onSubmit={(values) => {
-        const saved = runSafely(
+      onSubmit={(values) =>
+        runSafely(
           () => updateMedicine(medicine.id, toMedicineInput(values)),
           t("medicineForm.saveFailed"),
-        );
-        if (saved) router.back();
-        return saved;
-      }}
+        )
+      }
+      onClose={() => router.back()}
     />
   );
 }

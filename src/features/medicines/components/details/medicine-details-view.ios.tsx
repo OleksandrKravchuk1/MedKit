@@ -6,18 +6,14 @@ import {
   Section,
   Text,
 } from "@expo/ui/swift-ui";
-import { foregroundStyle } from "@expo/ui/swift-ui/modifiers";
 import { useTranslation } from "react-i18next";
+
+import { secondaryText } from "@/constants/swift-ui-styles";
 
 import { ActivePackageRow } from "./active-package-row";
 import { ArchivedPackageRow } from "./archived-package-row";
 import type { MedicineDetailsViewProps } from "./medicine-details-view";
 import { MedicineSummary } from "./medicine-summary";
-
-const secondaryText = foregroundStyle({
-  type: "hierarchical",
-  style: "secondary",
-});
 
 /**
  * Medicine details as a native SwiftUI Form: facts, packages (swipe actions,

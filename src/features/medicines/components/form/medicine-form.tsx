@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
 import { useMemo, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -14,7 +13,10 @@ type MedicineFormProps = {
   defaultValues: MedicineFormValues;
   addingPackage?: boolean;
   submitLabel: string;
+  /** Saves the values; returns true on success (the form then closes). */
   onSubmit: (values: MedicineFormValues) => boolean;
+  /** Leaves the form: after a successful save or on Cancel. */
+  onClose: () => void;
 };
 
 /**
@@ -28,6 +30,7 @@ export function MedicineForm({
   addingPackage = false,
   submitLabel,
   onSubmit,
+  onClose,
 }: MedicineFormProps) {
   const isCreate = mode === "create";
 
@@ -45,12 +48,13 @@ export function MedicineForm({
     void form.handleSubmit((values) => {
       if (saved.current) return;
       saved.current = onSubmit(values);
+      if (saved.current) onClose();
     })();
 
   useFormHeaderButtons({
     saveLabel: submitLabel,
     onSave: save,
-    onCancel: () => router.back(),
+    onCancel: onClose,
   });
 
   return (

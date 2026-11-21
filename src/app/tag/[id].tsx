@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import { LoadingView } from "@/components/feedback/loading-view";
@@ -31,6 +31,7 @@ export default function EditTagScreen() {
       key={tag.id}
       defaultValues={{ name: tag.name, color: tag.color }}
       onSubmit={(values) => updateTag(tag.id, values)}
+      onClose={() => router.back()}
     />
   );
 }

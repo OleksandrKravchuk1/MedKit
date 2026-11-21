@@ -24,6 +24,7 @@ import { useEffect } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { secondaryText } from "@/constants/swift-ui-styles";
 import { MEDICINE_FORMS, type MedicineForm } from "@/constants/medicine";
 import { TagSelectRow } from "@/features/tags/components/tag-select-row";
 import { useTags } from "@/features/tags/hooks/use-tags";
@@ -80,11 +81,6 @@ export function MedicineFormFields({
         {t(message as ParseKeys, { defaultValue: message })}
       </Text>
     ) : undefined;
-
-  const secondaryText = foregroundStyle({
-    type: "hierarchical",
-    style: "secondary",
-  });
 
   const setExpiry = (iso: string) =>
     expiryDate.field.onChange(
