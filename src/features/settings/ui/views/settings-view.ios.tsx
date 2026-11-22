@@ -34,12 +34,12 @@ import {
 import { datePickerStyle, pickerStyle, tag } from "@expo/ui/swift-ui/modifiers";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
-import { useSettings } from "../hooks/use-settings";
+import { useSettings } from "../../hooks/use-settings";
 import {
   setLanguage,
   setNotifyTime,
   setRemindDaysBefore,
-} from "../mutations/settings-mutations";
+} from "../../mutations/settings-mutations";
 import type { SettingsViewProps } from "./settings-view";
 
 export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {

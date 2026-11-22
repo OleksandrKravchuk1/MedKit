@@ -4,9 +4,9 @@ import { ScrollView, Text, View } from "react-native";
 import { Button } from "@/components/ui/button";
 
 import type { MedicineDetails } from "../../types/medicine-types";
-import { ActivePackageRow } from "./active-package-row";
-import { ArchivedPackageRow } from "./archived-package-row";
-import { MedicineSummary } from "./medicine-summary";
+import { ActivePackageRow } from "../components/details/active-package-row";
+import { ArchivedPackageRow } from "../components/details/archived-package-row";
+import { MedicineSummary } from "../components/details/medicine-summary";
 
 export type MedicineDetailsViewProps = {
   details: MedicineDetails;

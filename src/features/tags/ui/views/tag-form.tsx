@@ -7,10 +7,10 @@ import { useFormHeaderButtons } from "@/hooks/use-form-header-buttons";
 import { msg } from "@/i18n/msg";
 import { showError } from "@/lib/alerts";
 
-import { TagNameTakenError } from "../mutations/tag-mutations";
-import { tagFormSchema } from "../schemas/tag-form-schema";
-import type { TagFormValues } from "../types/tag-types";
-import { TagFormFields } from "./tag-form-fields";
+import { TagNameTakenError } from "../../mutations/tag-mutations";
+import { tagFormSchema } from "../../schemas/tag-form-schema";
+import type { TagFormValues } from "../../types/tag-types";
+import { TagFormFields } from "../components/tag-form-fields";
 
 type TagFormProps = {
   defaultValues: TagFormValues;

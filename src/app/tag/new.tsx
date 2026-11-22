@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 
 import { TAG_COLOR_PALETTE } from "@/constants/tags";
-import { TagForm } from "@/features/tags/components/tag-form";
+import { TagForm } from "@/features/tags/ui/views/tag-form";
 import { createTag } from "@/features/tags/mutations/tag-mutations";
 
 export default function NewTagScreen() {

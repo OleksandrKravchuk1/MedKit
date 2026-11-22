@@ -11,9 +11,9 @@ import { parseIsoDate, toIsoDate } from "@/lib/dates";
 import {
   STATUS_DOT_CLASS,
   STATUS_TEXT_CLASS,
-} from "../../constants/expiry-status-classes";
-import type { ActivePackage } from "../../types/medicine-types";
-import { formatPackageDetails } from "../../utils/medicine-display";
+} from "../../../constants/expiry-status-classes";
+import type { ActivePackage } from "../../../types/medicine-types";
+import { formatPackageDetails } from "../../../utils/medicine-display";
 
 export type ActivePackageRowProps = {
   pkg: ActivePackage;

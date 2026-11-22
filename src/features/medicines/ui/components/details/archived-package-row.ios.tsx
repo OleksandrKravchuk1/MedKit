@@ -6,7 +6,7 @@ import { PlatformColor } from "react-native";
 import { secondaryText } from "@/constants/swift-ui-styles";
 import { formatDate } from "@/i18n/format";
 
-import { formatPackageDetails } from "../../utils/medicine-display";
+import { formatPackageDetails } from "../../../utils/medicine-display";
 import type { ArchivedPackageRowProps } from "./archived-package-row";
 
 /**

@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 import { useThemeColors } from "@/hooks/use-theme-colors";
 
-import type { TagFormValues } from "../types/tag-types";
+import type { TagFormValues } from "../../types/tag-types";
 
 /**
  * Tag form fields as a native SwiftUI Form: name and the system ColorPicker

@@ -21,8 +21,8 @@ import { secondaryText } from "@/constants/swift-ui-styles";
 import { formatDaysLeft } from "@/i18n/format";
 import { parseIsoDate, toIsoDate } from "@/lib/dates";
 
-import { STATUS_SYSTEM_COLOR } from "../../constants/expiry-status-colors";
-import { formatPackageDetails } from "../../utils/medicine-display";
+import { STATUS_SYSTEM_COLOR } from "../../../constants/expiry-status-colors";
+import { formatPackageDetails } from "../../../utils/medicine-display";
 import type { ActivePackageRowProps } from "./active-package-row";
 
 /**

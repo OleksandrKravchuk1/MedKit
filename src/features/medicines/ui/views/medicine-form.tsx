@@ -6,7 +6,7 @@ import { useFormHeaderButtons } from "@/hooks/use-form-header-buttons";
 
 import { createMedicineFormSchema } from "../../schemas/medicine-form-schema";
 import type { MedicineFormValues } from "../../types/medicine-types";
-import { MedicineFormFields } from "./medicine-form-fields";
+import { MedicineFormFields } from "../components/form/medicine-form-fields";
 
 type MedicineFormProps = {
   mode: "create" | "edit";

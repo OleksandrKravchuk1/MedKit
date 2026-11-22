@@ -5,7 +5,7 @@ import { Text as RNText, View } from "react-native";
 
 import { secondaryText } from "@/constants/swift-ui-styles";
 import { SheetCloseButton } from "@/components/ui/sheet-close-button";
-import { TagSelectRow } from "@/features/tags/components/tag-select-row";
+import { TagSelectRow } from "@/features/tags/ui/components/tag-select-row";
 
 import { useMedicineFilter } from "../../hooks/list/use-medicine-filter";
 import type { MedicineFilterSheetProps } from "./medicine-filter-sheet";

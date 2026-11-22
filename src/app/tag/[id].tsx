@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
-import { TagForm } from "@/features/tags/components/tag-form";
+import { TagForm } from "@/features/tags/ui/views/tag-form";
 import { useTag } from "@/features/tags/hooks/use-tag";
 import { updateTag } from "@/features/tags/mutations/tag-mutations";
 

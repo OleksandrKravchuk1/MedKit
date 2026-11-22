@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
-import { MedicineForm } from "@/features/medicines/components/form/medicine-form";
+import { MedicineForm } from "@/features/medicines/ui/views/medicine-form";
 import { updateMedicine } from "@/features/medicines/mutations/medicine-mutations";
 import {
   toFormValues,

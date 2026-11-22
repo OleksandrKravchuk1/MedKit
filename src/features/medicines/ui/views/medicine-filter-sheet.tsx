@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { SheetCloseButton } from "@/components/ui/sheet-close-button";
-import { TagSelectRow } from "@/features/tags/components/tag-select-row";
+import { TagSelectRow } from "@/features/tags/ui/components/tag-select-row";
 
 import { useMedicineFilter } from "../../hooks/list/use-medicine-filter";
 

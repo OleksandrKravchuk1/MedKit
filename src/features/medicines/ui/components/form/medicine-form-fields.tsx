@@ -7,10 +7,10 @@ import { FormScrollView } from "@/components/form/form-scroll-view";
 import { TextField } from "@/components/form/text-field";
 import { Chip } from "@/components/ui/chip";
 import { MEDICINE_FORMS } from "@/constants/medicine";
-import { TagChips } from "@/features/tags/components/tag-chips";
+import { TagChips } from "@/features/tags/ui/components/tag-chips";
 import { useTags } from "@/features/tags/hooks/use-tags";
 
-import type { MedicineFormValues } from "../../types/medicine-types";
+import type { MedicineFormValues } from "../../../types/medicine-types";
 import { PackageFields } from "./package-fields";
 
 export type MedicineFormFieldsProps = {

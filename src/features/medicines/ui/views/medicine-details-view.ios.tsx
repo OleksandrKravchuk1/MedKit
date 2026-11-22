@@ -10,10 +10,10 @@ import { useTranslation } from "react-i18next";
 
 import { secondaryText } from "@/constants/swift-ui-styles";
 
-import { ActivePackageRow } from "./active-package-row";
-import { ArchivedPackageRow } from "./archived-package-row";
+import { ActivePackageRow } from "../components/details/active-package-row";
+import { ArchivedPackageRow } from "../components/details/archived-package-row";
 import type { MedicineDetailsViewProps } from "./medicine-details-view";
-import { MedicineSummary } from "./medicine-summary";
+import { MedicineSummary } from "../components/details/medicine-summary";
 
 /**
  * Medicine details as a native SwiftUI Form: facts, packages (swipe actions,

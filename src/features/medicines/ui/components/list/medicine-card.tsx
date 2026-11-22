@@ -7,9 +7,9 @@ import { cn } from "@/lib/cn";
 import {
   STATUS_DOT_CLASS,
   STATUS_TEXT_CLASS,
-} from "../../constants/expiry-status-classes";
-import { formatMedicineSubtitle } from "../../utils/medicine-display";
-import type { MedicineListItem } from "../../types/medicine-types";
+} from "../../../constants/expiry-status-classes";
+import { formatMedicineSubtitle } from "../../../utils/medicine-display";
+import type { MedicineListItem } from "../../../types/medicine-types";
 
 type MedicineCardProps = {
   item: MedicineListItem;

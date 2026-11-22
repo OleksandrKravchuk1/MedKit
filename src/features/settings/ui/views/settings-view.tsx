@@ -22,14 +22,14 @@ import { formatRemindDaysBefore } from "@/i18n/format";
 import { runSafely } from "@/lib/alerts";
 import { timeToDate } from "@/lib/dates";
 
-import { useSettings } from "../hooks/use-settings";
+import { useSettings } from "../../hooks/use-settings";
 import {
   setLanguage,
   setNotifyTime,
   setRemindDaysBefore,
-} from "../mutations/settings-mutations";
-import { SettingsRow } from "./settings-row";
-import { SettingsSection } from "./settings-section";
+} from "../../mutations/settings-mutations";
+import { SettingsRow } from "../components/settings-row";
+import { SettingsSection } from "../components/settings-section";
 
 export type SettingsViewProps = {
   onOpenTag: (id: number) => void;

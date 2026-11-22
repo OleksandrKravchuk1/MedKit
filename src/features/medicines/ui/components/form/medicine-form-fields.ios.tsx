@@ -26,7 +26,7 @@ import { useTranslation } from "react-i18next";
 
 import { secondaryText } from "@/constants/swift-ui-styles";
 import { MEDICINE_FORMS, type MedicineForm } from "@/constants/medicine";
-import { TagSelectRow } from "@/features/tags/components/tag-select-row";
+import { TagSelectRow } from "@/features/tags/ui/components/tag-select-row";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 import { parseIsoDate, toIsoDate, toLastDayOfMonth } from "@/lib/dates";
@@ -34,8 +34,8 @@ import { parseIsoDate, toIsoDate, toLastDayOfMonth } from "@/lib/dates";
 import {
   QUANTITY_MAX,
   QUANTITY_MIN,
-} from "../../constants/medicine-form-constants";
-import type { MedicineFormValues } from "../../types/medicine-types";
+} from "../../../constants/medicine-form-constants";
+import type { MedicineFormValues } from "../../../types/medicine-types";
 import type { MedicineFormFieldsProps } from "./medicine-form-fields";
 
 /**

@@ -9,7 +9,7 @@ import { TextField } from "@/components/form/text-field";
 import { TAG_COLOR_PALETTE, TAG_NAME_MAX_LENGTH } from "@/constants/tags";
 import { cn } from "@/lib/cn";
 
-import type { TagFormValues } from "../types/tag-types";
+import type { TagFormValues } from "../../types/tag-types";
 
 /**
  * Tag form fields, React Native layout (Android): name and a colour palette.

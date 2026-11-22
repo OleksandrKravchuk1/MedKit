@@ -51,11 +51,14 @@ drizzle.config.ts  # schema: './src/db/schema.ts', out: './drizzle', dialect: 's
 
 ```
 features/<feature>/
-  components/   # React-компоненти, один на файл, у підпапках за частиною UI:
-                #   list/, filter/, form/, details/ (form/medicine-form.tsx)
+  ui/
+    views/      # вміст екрана, один на маршрут чи шторку: medicine-details-view.tsx,
+                #   medicine-form.tsx; рендерить маршрут з app/
+    components/ # будівельні блоки для views, один на файл; коли їх багато — підпапки
+                #   за частиною UI: list/, filter/, form/, details/ (list/medicine-card.tsx)
   hooks/        # хуки фічі, один на файл: читання (use-medicine-list.ts),
                 #   спільний стан-контекст (use-medicine-filter.tsx), опції екрана;
-                #   коли їх багато — підпапки як у components/ (list/, details/)
+                #   коли їх багато — підпапки як у ui/components/ (list/, details/)
   mutations/    # записи в БД, файл на сутність: medicine-mutations.ts, package-mutations.ts
   schemas/      # zod-схеми: medicine-form-schema.ts
   constants/    # константи фічі, дефолти форм, класи кольорів: medicine-form-constants.ts
@@ -64,9 +67,12 @@ features/<feature>/
 ```
 
 - `utils/` не імпортує `db/client`, хуки й компоненти — щоб юніт-тести не тягнули expo-sqlite.
-- Підпапки `components/` групують за частиною інтерфейсу (що змінюється разом), а не за типом.
+- `ui/views/` — точка входу екрана. Навігацію отримують колбеками від маршруту в `app/` і самі
+  `router` не викликають; дані завантажує маршрут, якщо від них залежать стани екрана
+  (завантаження, «не знайдено»).
+- Підпапки `ui/components/` групують за частиною інтерфейсу (що змінюється разом), а не за типом.
   Платформні версії поруч: `medicine-form-fields.tsx` (Android) і `.ios.tsx` (SwiftUI).
-- Фічі імпортують одна одну тільки через `hooks/`, `components/`, `types/` (не внутрішні `utils/`).
+- Фічі імпортують одна одну тільки через `hooks/`, `ui/`, `types/` (не внутрішні `utils/`).
 - Імпорти через аліас `@/` → `src/`; всередині фічі — відносні. Без barrel-файлів
   (`index.ts` з реекспортами): Metro не робить tree-shaking, а barrel провокує цикли.
 - Файли в kebab-case; компоненти — іменовані експорти; пропси типізуються як `<Name>Props`.

@@ -4,7 +4,7 @@ import type {
 } from "expo-router/native-stack";
 import { useTranslation } from "react-i18next";
 
-import { MedicineFilterButton } from "../../components/filter/medicine-filter-button";
+import { MedicineFilterButton } from "../../ui/components/filter/medicine-filter-button";
 import { useMedicineFilter } from "./use-medicine-filter";
 
 type HeaderOptions = Pick<

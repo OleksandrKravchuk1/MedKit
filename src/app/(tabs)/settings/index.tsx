@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 
-import { SettingsView } from "@/features/settings/components/settings-view";
+import { SettingsView } from "@/features/settings/ui/views/settings-view";
 
 export default function SettingsScreen() {
   return (
