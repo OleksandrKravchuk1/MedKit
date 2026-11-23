@@ -5,6 +5,8 @@ import type { ListExpiryStatus } from "../types/medicine-types";
 /**
  * iOS system colours for expiry statuses (SwiftUI views). They adapt to
  * light/dark mode and accessibility contrast; use only in .ios files.
+ * React Native views use the classes in expiry-status-classes.ts: keep the
+ * two in step.
  */
 export const STATUS_SYSTEM_COLOR: Record<ListExpiryStatus, ColorValue> = {
   ok: PlatformColor("systemGreen"),

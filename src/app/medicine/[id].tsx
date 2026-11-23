@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { LoadingView } from "@/components/feedback/loading-view";
 import { StateView } from "@/components/feedback/state-view";
 import { Button } from "@/components/ui/button";
-import { MedicineDetailsView } from "@/features/medicines/components/details/medicine-details-view";
+import { MedicineDetailsView } from "@/features/medicines/ui/views/medicine-details-view";
 import { useMedicine } from "@/features/medicines/hooks/details/use-medicine";
 import { useSetMedicineDetailsHeader } from "@/features/medicines/hooks/details/use-set-medicine-details-header";
 import { deleteMedicine } from "@/features/medicines/mutations/medicine-mutations";
