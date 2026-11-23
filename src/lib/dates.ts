@@ -1,9 +1,14 @@
 import {
+  addDays,
   differenceInCalendarDays,
   endOfMonth,
   format,
   isValid,
+  max,
   parseISO,
+  set,
+  startOfDay,
+  subDays,
 } from "date-fns";
 
 /*
@@ -54,6 +59,33 @@ export function toLastDayOfMonth(iso: string): string {
 /** Calendar days from today until expiry; negative when already expired. */
 export function daysUntil(iso: string, today: string): number {
   return differenceInCalendarDays(parseIsoDate(iso), parseIsoDate(today));
+}
+
+/**
+ * When to remind about a package: `remindDaysBefore` days before expiry at
+ * `notifyTime` ("HH:mm"). If that is earlier than the day after the package
+ * was added, the reminder comes on that next day instead. The result depends
+ * only on stored data, so recomputing it never moves a reminder forward.
+ * Returns null when the reminder would come after the expiry date.
+ */
+export function getReminderDate(
+  expiryIso: string,
+  addedAt: Date,
+  remindDaysBefore: number,
+  notifyTime: string,
+): Date | null {
+  const [hours, minutes] = notifyTime.split(":").map(Number);
+
+  const atNotifyTime = (date: Date) =>
+    set(date, { hours, minutes, seconds: 0, milliseconds: 0 });
+
+  const regular = atNotifyTime(
+    subDays(parseIsoDate(expiryIso), remindDaysBefore),
+  );
+  const dayAfterAdded = atNotifyTime(addDays(startOfDay(addedAt), 1));
+  const reminder = max([regular, dayAfterAdded]);
+
+  return toIsoDate(reminder) > expiryIso ? null : reminder;
 }
 
 /** A medicine is usable through its expiry date and expired from the next day. */

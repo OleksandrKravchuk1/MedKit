@@ -36,7 +36,6 @@ export const packages = sqliteTable(
     status: text("status", { enum: PACKAGE_STATUSES })
       .notNull()
       .default("active"),
-    notificationId: text("notification_id"),
     createdAt: createdAt(),
   },
   (t) => [
