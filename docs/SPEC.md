@@ -5,7 +5,7 @@
 - `medicines`: id, name, form (tablets | capsules | syrup | drops | ointment | spray | other),
   dosage?, barcode? (unique), notes?, createdAt
 - `packages`: id, medicineId (FK → medicines, cascade), expiryDate (TEXT 'YYYY-MM-DD'),
-  quantity (int, default 1), batch?, status (active | used | discarded), notificationId?, createdAt
+  quantity (int, default 1), batch?, status (active | used | discarded), createdAt
 - `tags`: id, name (unique), color
 - `medicine_tags`: medicineId, tagId (складений PK, cascade)
 - `settings`: key, value. Дефолти: remindDaysBefore = 7, notifyTime = "10:00"
@@ -51,12 +51,15 @@ src/app/
 6. **Онбординг**: 1–2 екрани; запит дозволу на сповіщення з поясненням. Показується один раз
    (прапорець у settings).
 
-## Сповіщення (`src/lib/notifications.ts`)
+## Сповіщення (`src/lib/notifications.ts`, `src/features/notifications`)
 
-- schedule / cancel / rescheduleAll.
-- Тригер: (expiryDate − remindDaysBefore) о notifyTime. Якщо ця дата вже минула, а упаковка
-  ще не прострочена, сплануй на завтра о notifyTime.
-- notificationId зберігати в packages; скасовувати при зміні дати, статусі used/discarded і видаленні.
+- Одна синхронізація замість окремих schedule/cancel: при будь-якій зміні препаратів, активних
+  упаковок, налаштувань нагадувань чи мови, а також раз на день, усі заплановані сповіщення
+  скасовуються й плануються наново. Id сповіщення — `package-<id>`, у БД не зберігається.
+- Тригер: (expiryDate − remindDaysBefore) о notifyTime. Якщо це раніше, ніж наступний день після
+  додавання упаковки (createdAt), — наступного дня після додавання о notifyTime. Момент залежить
+  лише від збережених даних, тож пересинхронізація не переносить нагадування. Якщо момент
+  випадає після expiryDate або вже минув — сповіщення немає.
 - Ліміт iOS 64 заплановані сповіщення: планувати лише найближчі 60.
 - Тап по сповіщенню відкриває `medicine/[id]`.
 - Android: створити notification channel.

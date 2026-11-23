@@ -29,8 +29,8 @@ MVP повністю офлайн: без бекенду й акаунтів, д
 src/
   app/          # тільки екрани (Expo Router); вкладки з власним Stack: (tabs)/(medicines), (tabs)/settings
   db/           # schema.ts, client.ts, seed.ts, use-database-ready.ts
-  lib/          # чиста логіка без React: dates.ts, cn.ts, alerts.ts; далі gs1.ts, notifications.ts
-  features/     # medicines/, tags/ (settings/ — етап 3); будова фічі — нижче
+  lib/          # чиста логіка без React: dates.ts, cn.ts, alerts.ts, notifications.ts; далі gs1.ts
+  features/     # medicines/, tags/, settings/, notifications/; будова фічі — нижче
   components/
     ui/         # базові елементи: button, chip, fab
     form/       # поля форм: text-field, date-field, date-picker, stepper, field, form-scroll-view

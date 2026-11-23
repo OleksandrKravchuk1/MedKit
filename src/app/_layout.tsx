@@ -1,6 +1,11 @@
 import "@/global.css";
 
-import { Stack, ThemeProvider, type ErrorBoundaryProps } from "expo-router";
+import {
+  router,
+  Stack,
+  ThemeProvider,
+  type ErrorBoundaryProps,
+} from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
@@ -13,6 +18,9 @@ import { StateView } from "@/components/feedback/state-view";
 import { DEFAULT_TAGS } from "@/constants/tags";
 import { navigationThemes } from "@/constants/theme";
 import { useDatabaseReady } from "@/db/use-database-ready";
+import { useNotificationSetup } from "@/features/notifications/hooks/use-notification-setup";
+import { useNotificationSync } from "@/features/notifications/hooks/use-notification-sync";
+import { useReminderTap } from "@/features/notifications/hooks/use-reminder-tap";
 import { useApplySavedLanguage } from "@/features/settings/hooks/use-apply-saved-language";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 // Importing @/i18n also initializes it, before any screen renders.
@@ -47,6 +55,15 @@ export default function RootLayout() {
   const { ready: databaseReady, error } = useDatabaseReady(getDefaultTags);
   const languageReady = useApplySavedLanguage(databaseReady);
   const ready = databaseReady && languageReady;
+
+  const notificationsReady = useNotificationSetup(ready);
+  useNotificationSync(notificationsReady);
+  useReminderTap(ready, (medicineId) =>
+    router.push({
+      pathname: "/medicine/[id]",
+      params: { id: String(medicineId) },
+    }),
+  );
 
   useEffect(() => {
     if (ready || error) SplashScreen.hide();

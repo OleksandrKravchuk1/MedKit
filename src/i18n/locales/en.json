@@ -188,5 +188,9 @@
     "saveFailed": "Could not save the tag",
     "loadFailed": "Could not load the tag",
     "notFound": "Tag not found"
+  },
+  "notifications": {
+    "channelName": "Expiry dates",
+    "body": "Expires on {{date}}: {{left}}."
   }
 }
