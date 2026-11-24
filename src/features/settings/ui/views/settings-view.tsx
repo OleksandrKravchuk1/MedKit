@@ -14,6 +14,7 @@ import {
   REMIND_DAYS_MIN,
   type LanguageSetting,
 } from "@/constants/settings";
+import { useNotificationPermission } from "@/features/notifications/hooks/use-notification-permission";
 import { useConfirmDeleteTag } from "@/features/tags/hooks/use-confirm-delete-tag";
 import { useTags } from "@/features/tags/hooks/use-tags";
 import { useThemeColors } from "@/hooks/use-theme-colors";
@@ -44,6 +45,7 @@ export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {
   const confirmDeleteTag = useConfirmDeleteTag();
   const { data: settings, isLoading } = useSettings();
   const [timePickerOpen, setTimePickerOpen] = useState(false);
+  const notifications = useNotificationPermission();
 
   if (isLoading) return <LoadingView />;
 
@@ -73,6 +75,24 @@ export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {
         title={t("settings.sectionReminders")}
         footer={t("settings.remindersFooter")}
       >
+        {notifications.allowed === false ? (
+          <SettingsRow
+            label={t("settings.notificationsOff")}
+            value={t("settings.notificationsOffHint")}
+            onPress={() => void notifications.enable()}
+            leading={
+              <SymbolView
+                name={{
+                  ios: "bell.slash.fill",
+                  android: "notifications_off",
+                  web: "notifications_off",
+                }}
+                tintColor={colors.danger}
+                size={22}
+              />
+            }
+          />
+        ) : null}
         <SettingsRow
           label={formatRemindDaysBefore(days)}
           trailing={

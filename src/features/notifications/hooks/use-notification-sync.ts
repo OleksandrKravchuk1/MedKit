@@ -15,6 +15,7 @@ import { replaceScheduledReminders, type Reminder } from "@/lib/notifications";
 
 import type { NotificationPlanItem } from "../types/notification-types";
 import { buildNotificationPlan } from "../utils/notification-plan";
+import { useNotificationPermission } from "./use-notification-permission";
 
 function toReminder(item: NotificationPlanItem): Reminder {
   const daysLeft = daysUntil(item.expiryDate, toIsoDate(item.date));
@@ -37,6 +38,7 @@ function toReminder(item: NotificationPlanItem): Reminder {
  */
 export function useNotificationSync(enabled: boolean): void {
   const { i18n: i18nInstance } = useTranslation();
+  const { allowed } = useNotificationPermission();
   const today = useToday();
   const settings = useSettings();
   const meds = useLiveQuery(
@@ -64,7 +66,7 @@ export function useNotificationSync(enabled: boolean): void {
   const language = i18nInstance.language;
 
   useEffect(() => {
-    if (!enabled || !loaded) return;
+    if (!enabled || !loaded || !allowed) return;
 
     const reminders = buildNotificationPlan({
       packages: activePackages.data,
@@ -83,6 +85,7 @@ export function useNotificationSync(enabled: boolean): void {
   }, [
     enabled,
     loaded,
+    allowed,
     meds.data,
     activePackages.data,
     remindDaysBefore,

@@ -22,6 +22,7 @@ import { useNotificationSetup } from "@/features/notifications/hooks/use-notific
 import { useNotificationSync } from "@/features/notifications/hooks/use-notification-sync";
 import { useReminderTap } from "@/features/notifications/hooks/use-reminder-tap";
 import { useApplySavedLanguage } from "@/features/settings/hooks/use-apply-saved-language";
+import { useOnboardingDone } from "@/features/settings/hooks/use-onboarding-done";
 import { useThemeColors } from "@/hooks/use-theme-colors";
 // Importing @/i18n also initializes it, before any screen renders.
 import i18n from "@/i18n";
@@ -54,11 +55,13 @@ export default function RootLayout() {
   const { scheme, colors } = useThemeColors();
   const { ready: databaseReady, error } = useDatabaseReady(getDefaultTags);
   const languageReady = useApplySavedLanguage(databaseReady);
-  const ready = databaseReady && languageReady;
+  const onboarding = useOnboardingDone(databaseReady);
+
+  const ready = databaseReady && languageReady && !onboarding.isLoading;
 
   const notificationsReady = useNotificationSetup(ready);
-  useNotificationSync(notificationsReady);
-  useReminderTap(ready, (medicineId) =>
+  useNotificationSync(notificationsReady && onboarding.done);
+  useReminderTap(ready && onboarding.done, (medicineId) =>
     router.push({
       pathname: "/medicine/[id]",
       params: { id: String(medicineId) },
@@ -79,20 +82,42 @@ export default function RootLayout() {
 
   if (!ready && !error) return null;
 
-  return (
-    // KeyboardProvider is required by react-native-keyboard-controller (FormScrollView).
-    <KeyboardProvider>
-      <ThemeProvider value={navigationThemes[scheme]}>
-        <StatusBar style="auto" />
-        {error ? (
+  if (error) {
+    return (
+      <KeyboardProvider>
+        <ThemeProvider value={navigationThemes[scheme]}>
+          <StatusBar style="auto" />
           <StateView
             tone="error"
             title={t("app.databaseFailed")}
             description={error.message}
           />
-        ) : (
-          <Stack screenOptions={{ headerBackButtonDisplayMode: "minimal" }}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </ThemeProvider>
+      </KeyboardProvider>
+    );
+  }
+
+  return (
+    <KeyboardProvider>
+      <ThemeProvider value={navigationThemes[scheme]}>
+        <StatusBar style="auto" />
+        <Stack screenOptions={{ headerBackButtonDisplayMode: "minimal" }}>
+          <Stack.Protected guard={!onboarding.done}>
+            <Stack.Screen
+              name="onboarding"
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack.Protected>
+
+          <Stack.Protected guard={onboarding.done}>
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                headerShown: false,
+              }}
+            />
             <Stack.Screen
               name="medicine/new"
               options={{
@@ -102,7 +127,9 @@ export default function RootLayout() {
             />
             <Stack.Screen
               name="medicine/[id]"
-              options={{ title: t("navigation.medicine") }}
+              options={{
+                title: t("navigation.medicine"),
+              }}
             />
             <Stack.Screen
               name="medicine/[id]/edit"
@@ -132,9 +159,8 @@ export default function RootLayout() {
                 title: t("navigation.scanner"),
               }}
             />
-            <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-          </Stack>
-        )}
+          </Stack.Protected>
+        </Stack>
       </ThemeProvider>
     </KeyboardProvider>
   );
