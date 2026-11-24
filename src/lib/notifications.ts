@@ -17,6 +17,11 @@ export type Reminder = {
   medicineId: number;
 };
 
+export type NotificationPermission = {
+  allowed: boolean;
+  canAskAgain: boolean;
+};
+
 /**
  * Shows notifications while the app is in the foreground and creates the
  * Android channel. On Android 13+ the permission prompt appears only after a
@@ -64,6 +69,12 @@ export async function requestNotificationPermission(): Promise<boolean> {
   }
 
   return isAllowed(await Notifications.requestPermissionsAsync());
+}
+
+/** Current notification permission, without asking. */
+export async function getNotificationPermission(): Promise<NotificationPermission> {
+  const current = await Notifications.getPermissionsAsync();
+  return { allowed: isAllowed(current), canAskAgain: current.canAskAgain };
 }
 
 /** Cancels every scheduled notification and schedules `reminders` instead. */

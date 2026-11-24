@@ -1,8 +1,3 @@
-import {
-  primaryText,
-  secondaryText,
-  tertiaryText,
-} from "@/constants/swift-ui-styles";
 import { LoadingView } from "@/components/feedback/loading-view";
 import {
   LANGUAGE_SETTINGS,
@@ -10,8 +5,15 @@ import {
   REMIND_DAYS_MAX,
   REMIND_DAYS_MIN,
 } from "@/constants/settings";
+import {
+  primaryText,
+  secondaryText,
+  tertiaryText,
+} from "@/constants/swift-ui-styles";
+import { useNotificationPermission } from "@/features/notifications/hooks/use-notification-permission";
 import { useConfirmDeleteTag } from "@/features/tags/hooks/use-confirm-delete-tag";
 import { useTags } from "@/features/tags/hooks/use-tags";
+import { useThemeColors } from "@/hooks/use-theme-colors";
 import { applyLanguage } from "@/i18n";
 import { formatRemindDaysBefore } from "@/i18n/format";
 import { runSafely } from "@/lib/alerts";
@@ -30,8 +32,14 @@ import {
   Stepper,
   SwipeActions,
   Text,
+  VStack,
 } from "@expo/ui/swift-ui";
-import { datePickerStyle, pickerStyle, tag } from "@expo/ui/swift-ui/modifiers";
+import {
+  datePickerStyle,
+  font,
+  pickerStyle,
+  tag,
+} from "@expo/ui/swift-ui/modifiers";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "../../hooks/use-settings";
@@ -47,6 +55,8 @@ export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {
   const { data: tags } = useTags();
   const confirmDeleteTag = useConfirmDeleteTag();
   const { data: settings, isLoading } = useSettings();
+  const { colors } = useThemeColors();
+  const notifications = useNotificationPermission();
 
   const version = Constants.expoConfig?.version;
 
@@ -69,6 +79,33 @@ export function SettingsView({ onOpenTag, onAddTag }: SettingsViewProps) {
             </Text>
           }
         >
+          {notifications.allowed === false && (
+            <Button onPress={() => void notifications.enable()}>
+              <HStack spacing={12}>
+                <Image
+                  systemName="bell.slash.fill"
+                  color={colors.danger}
+                  size={17}
+                />
+                <VStack alignment="leading" spacing={2}>
+                  <Text modifiers={[primaryText]}>
+                    {t("settings.notificationsOff")}
+                  </Text>
+                  <Text
+                    modifiers={[font({ textStyle: "footnote" }), secondaryText]}
+                  >
+                    {t("settings.notificationsOffHint")}
+                  </Text>
+                </VStack>
+                <Spacer />
+                <Image
+                  systemName="chevron.right"
+                  size={13}
+                  modifiers={[tertiaryText]}
+                />
+              </HStack>
+            </Button>
+          )}
           <Stepper
             label={formatRemindDaysBefore(settings.remindDaysBefore)}
             value={settings.remindDaysBefore}

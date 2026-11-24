@@ -27,3 +27,7 @@ export function setNotifyTime(date: Date): void {
 export function setLanguage(language: LanguageSetting): void {
   setSetting(SETTING_KEYS.language, language);
 }
+
+export function completeOnboarding(): void {
+  setSetting(SETTING_KEYS.onboardingDone, "true");
+}

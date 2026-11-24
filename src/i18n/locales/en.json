@@ -166,6 +166,8 @@
     },
     "notifyTime": "Notification time",
     "remindersFooter": "The notification arrives at the chosen time the set number of days before the expiry date.",
+    "notificationsOff": "Notifications are off",
+    "notificationsOffHint": "Reminders won't appear. Tap to turn them on.",
     "sectionLanguage": "Language",
     "language": "App language",
     "languageSystem": "System",
@@ -192,5 +194,24 @@
   "notifications": {
     "channelName": "Expiry dates",
     "body": "Expires on {{date}}: {{left}}."
+  },
+  "onboarding": {
+    "title": "Welcome to MedKit",
+    "features": {
+      "medicines": {
+        "title": "Your whole medicine cabinet",
+        "text": "Add medicines and packages with their expiry dates."
+      },
+      "scan": {
+        "title": "Quick adding",
+        "text": "Scan the barcode or DataMatrix on the package."
+      },
+      "reminders": {
+        "title": "Timely reminders",
+        "text": "The app lets you know when an expiry date is getting close."
+      }
+    },
+    "notificationsNote": "For reminders, the app will ask for notification permission. You can change it any time in Settings.",
+    "continue": "Continue"
   }
 }
