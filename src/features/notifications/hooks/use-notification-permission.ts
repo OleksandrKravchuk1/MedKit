@@ -1,12 +1,40 @@
 import { useEffect, useState } from "react";
 import { AppState, Linking } from "react-native";
 
+import i18n from "@/i18n";
 import {
+  createExpiryChannel,
   getNotificationPermission,
+  requestNotificationPermission,
   type NotificationPermission,
 } from "@/lib/notifications";
 
-import { useRequestNotificationPermission } from "./use-request-notification-permission";
+let channelReady: Promise<void> | null = null;
+
+/**
+ * Creates the Android reminder channel once per launch. Needed before the
+ * permission prompt (Android 13+) and before scheduling. Never rejects.
+ */
+export function ensureExpiryChannel(): Promise<void> {
+  channelReady ??= createExpiryChannel(
+    i18n.t("notifications.channelName"),
+  ).catch((error: unknown) => {
+    console.warn("Creating the notification channel failed", error);
+  });
+  return channelReady;
+}
+
+/**
+ * Asks for notification permission, creating the channel first.
+ * Never rejects: a failure counts as denied.
+ */
+export async function askNotificationPermission(): Promise<NotificationPermission> {
+  await ensureExpiryChannel();
+  return requestNotificationPermission().catch(() => ({
+    allowed: false,
+    canAskAgain: false,
+  }));
+}
 
 /**
  * Notification permission, rechecked whenever the app returns to the
@@ -15,30 +43,29 @@ import { useRequestNotificationPermission } from "./use-request-notification-per
  * otherwise opens the app's system settings.
  */
 export function useNotificationPermission() {
-  const requestPermission = useRequestNotificationPermission();
   const [permission, setPermission] = useState<NotificationPermission | null>(
     null,
   );
 
-  const refresh = () =>
-    getNotificationPermission()
-      .then(setPermission)
-      .catch((error: unknown) => {
-        console.warn("Reading notification permission failed", error);
-      });
-
   useEffect(() => {
-    void refresh();
+    const refresh = () => {
+      getNotificationPermission()
+        .then(setPermission)
+        .catch((error: unknown) => {
+          console.warn("Reading notification permission failed", error);
+        });
+    };
+
+    refresh();
     const subscription = AppState.addEventListener("change", (state) => {
-      if (state === "active") void refresh();
+      if (state === "active") refresh();
     });
     return () => subscription.remove();
   }, []);
 
   const enable = async () => {
     if (permission?.canAskAgain) {
-      await requestPermission();
-      await refresh();
+      setPermission(await askNotificationPermission());
     } else {
       await Linking.openSettings();
     }
