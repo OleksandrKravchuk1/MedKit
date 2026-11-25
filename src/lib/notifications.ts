@@ -19,15 +19,15 @@ export type Reminder = {
 
 export type NotificationPermission = {
   allowed: boolean;
+  /** False once the system will not show the prompt again. */
   canAskAgain: boolean;
 };
 
 /**
- * Shows notifications while the app is in the foreground and creates the
- * Android channel. On Android 13+ the permission prompt appears only after a
- * channel exists, so call this before requesting permission.
+ * Shows reminders that arrive while the app is open. Call once at module
+ * scope of the root layout, as the expo-notifications docs do.
  */
-export async function setupNotifications(channelName: string): Promise<void> {
+export function showNotificationsInForeground(): void {
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
       shouldShowBanner: true,
@@ -36,13 +36,27 @@ export async function setupNotifications(channelName: string): Promise<void> {
       shouldSetBadge: false,
     }),
   });
+}
 
-  if (Platform.OS === "android") {
-    await Notifications.setNotificationChannelAsync(EXPIRY_CHANNEL_ID, {
-      name: channelName,
-      importance: AndroidImportance.DEFAULT,
-    });
-  }
+/**
+ * Creates (or renames) the Android channel for reminders; no-op elsewhere.
+ * Android 13+ shows the permission prompt only after a channel exists.
+ */
+export async function createExpiryChannel(name: string): Promise<void> {
+  if (Platform.OS !== "android") return;
+  await Notifications.setNotificationChannelAsync(EXPIRY_CHANNEL_ID, {
+    name,
+    importance: AndroidImportance.DEFAULT,
+  });
+}
+
+function toPermission(
+  permissions: Notifications.NotificationPermissionsStatus,
+): NotificationPermission {
+  return {
+    allowed: isAllowed(permissions),
+    canAskAgain: permissions.canAskAgain,
+  };
 }
 
 function isAllowed(permissions: Notifications.NotificationPermissionsStatus) {
@@ -58,23 +72,16 @@ function isAllowed(permissions: Notifications.NotificationPermissionsStatus) {
   return permissions.granted;
 }
 
-/**
- * Asks for notification permission unless it is already decided.
- * Resolves to whether notifications are allowed.
- */
-export async function requestNotificationPermission(): Promise<boolean> {
-  const current = await Notifications.getPermissionsAsync();
-  if (isAllowed(current) || !current.canAskAgain) {
-    return isAllowed(current);
-  }
-
-  return isAllowed(await Notifications.requestPermissionsAsync());
-}
-
 /** Current notification permission, without asking. */
 export async function getNotificationPermission(): Promise<NotificationPermission> {
+  return toPermission(await Notifications.getPermissionsAsync());
+}
+
+/** Asks for notification permission unless it is already decided. */
+export async function requestNotificationPermission(): Promise<NotificationPermission> {
   const current = await Notifications.getPermissionsAsync();
-  return { allowed: isAllowed(current), canAskAgain: current.canAskAgain };
+  if (isAllowed(current) || !current.canAskAgain) return toPermission(current);
+  return toPermission(await Notifications.requestPermissionsAsync());
 }
 
 /** Cancels every scheduled notification and schedules `reminders` instead. */

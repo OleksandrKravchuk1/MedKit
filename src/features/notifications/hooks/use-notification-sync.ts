@@ -15,7 +15,10 @@ import { replaceScheduledReminders, type Reminder } from "@/lib/notifications";
 
 import type { NotificationPlanItem } from "../types/notification-types";
 import { buildNotificationPlan } from "../utils/notification-plan";
-import { useNotificationPermission } from "./use-notification-permission";
+import {
+  ensureExpiryChannel,
+  useNotificationPermission,
+} from "./use-notification-permission";
 
 function toReminder(item: NotificationPlanItem): Reminder {
   const daysLeft = daysUntil(item.expiryDate, toIsoDate(item.date));
@@ -78,6 +81,7 @@ export function useNotificationSync(enabled: boolean): void {
     }).map(toReminder);
 
     queue.current = queue.current
+      .then(ensureExpiryChannel)
       .then(() => replaceScheduledReminders(reminders))
       .catch((error: unknown) => {
         console.warn("Scheduling reminders failed", error);

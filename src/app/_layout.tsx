@@ -18,7 +18,6 @@ import { StateView } from "@/components/feedback/state-view";
 import { DEFAULT_TAGS } from "@/constants/tags";
 import { navigationThemes } from "@/constants/theme";
 import { useDatabaseReady } from "@/db/use-database-ready";
-import { useNotificationSetup } from "@/features/notifications/hooks/use-notification-setup";
 import { useNotificationSync } from "@/features/notifications/hooks/use-notification-sync";
 import { useReminderTap } from "@/features/notifications/hooks/use-reminder-tap";
 import { useApplySavedLanguage } from "@/features/settings/hooks/use-apply-saved-language";
@@ -26,9 +25,12 @@ import { useOnboardingDone } from "@/features/settings/hooks/use-onboarding-done
 import { useThemeColors } from "@/hooks/use-theme-colors";
 // Importing @/i18n also initializes it, before any screen renders.
 import i18n from "@/i18n";
+import { showNotificationsInForeground } from "@/lib/notifications";
 
 // Keep the native splash visible until the database is migrated and seeded.
 void SplashScreen.preventAutoHideAsync();
+
+showNotificationsInForeground();
 
 /**
  * Catches render errors anywhere in the app (routes without their own
@@ -59,8 +61,8 @@ export default function RootLayout() {
 
   const ready = databaseReady && languageReady && !onboarding.isLoading;
 
-  const notificationsReady = useNotificationSetup(ready);
-  useNotificationSync(notificationsReady && onboarding.done);
+  // Schedule only after onboarding: by then the permission is answered.
+  useNotificationSync(ready && onboarding.done);
   useReminderTap(ready && onboarding.done, (medicineId) =>
     router.push({
       pathname: "/medicine/[id]",
